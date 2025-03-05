@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Theme Configuration */
+    --primary: theme('colors.primary.DEFAULT');
+    --primary-dark: theme('colors.primary.800');
+    --primary-light: theme('colors.primary.600');
+    --primary-contrast: white;
+
+    --accent: theme('colors.accent.DEFAULT');
+    --accent-dark: theme('colors.accent.700');
+    --accent-light: theme('colors.accent.500');
+    --accent-contrast: white;
+
+    --dark: theme('colors.dark.DEFAULT');
+    --dark-light: theme('colors.dark.900');
+    --dark-lighter: theme('colors.dark.800');
+
+    /* System Colors */
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --info: #3b82f6;
+
+    /* Swiper Configuration */
+    --swiper-theme-color: var(--primary);
+    --swiper-navigation-size: 24px;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--dark);
+  overflow-x: hidden;
+  background-color: theme('colors.dark.50');
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.dark.100');
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Swiper custom styles */
+.swiper-slide {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.swiper-slide-active {
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--primary);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary) !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  display: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@layer components {
+  /* Custom Utilities */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary-dark;
+  }
+
+  .bg-gradient-accent {
+    @apply bg-gradient-to-r from-accent to-accent-dark;
+  }
+
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent;
+  }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-accent to-accent-dark bg-clip-text text-transparent;
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-dark text-white font-medium py-2 px-6 rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary font-medium py-2 px-6 rounded-full transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-lg;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .card-gradient {
+    @apply bg-gradient-to-br from-primary-50 to-primary-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+}

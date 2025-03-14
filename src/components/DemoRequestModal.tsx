@@ -3,6 +3,7 @@ import { X, RefreshCw, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 interface FormData {
   nombre: string;
@@ -19,6 +20,7 @@ interface DemoRequestModalProps {
 
 const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     nombre: '',
     correo: '',
@@ -33,10 +35,8 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [termsError, setTermsError] = useState('');
   
-  // Cargar CAPTCHA cuando el modal se abre
   useEffect(() => {
     if (isOpen && captchaRef.current) {
-      // Pequeño retraso para asegurar que el DOM esté listo
       const timer = setTimeout(() => {
         try {
           loadCaptchaEnginge(6);
@@ -53,7 +53,6 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Limpiar error cuando el usuario comienza a escribir
     if (errors[name as keyof FormData]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -67,7 +66,6 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
       setPrivacyAccepted(checked);
     }
     
-    // Limpiar error de términos si alguno de los checkboxes es marcado
     if (checked) {
       setTermsError('');
     }
@@ -90,7 +88,6 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
       newErrors.empresa = 'El nombre de la empresa es requerido';
     }
     
-    // Verificar que se hayan aceptado los términos y la política de privacidad
     if (!termsAccepted || !privacyAccepted) {
       setTermsError('Debes aceptar los Términos y Condiciones y la Política de Privacidad para continuar.');
       return false;
@@ -111,9 +108,7 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
     
     if (validateForm()) {
       console.log('Formulario enviado:', formData);
-      // Redirigir a la página de bienvenida al demo
       navigate('/demo-bienvenido');
-      // Cerrar el modal después de redirigir
       onClose();
     }
   };
@@ -133,27 +128,29 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in">
-        {/* Encabezado */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 flex justify-between items-center">
+    <div className="fixed inset-0 bg-black/75 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in scale-95 md:scale-100">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 flex justify-between items-center">
           <div className="flex items-center">
-            <div className="bg-white rounded-full w-8 h-8 flex items-center justify-center mr-2">
-              <span className="text-blue-700 font-bold text-sm">AI</span>
+            <div className="bg-white/90 rounded-full w-8 h-8 flex items-center justify-center mr-2">
+              <span className="text-blue-600 font-bold text-sm">AI</span>
             </div>
-            <h3 className="font-semibold">Solicitar demostración</h3>
+            <h3 className="font-medium text-sm">
+              {language === 'es' ? 'Mira El Demo En Vivo' : 'Watch Live Demo'}
+            </h3>
           </div>
           <button 
             onClick={onClose}
-            className="text-white hover:text-gray-200 transition-colors"
-            aria-label="Cerrar modal"
+            className="text-white/80 hover:text-white transition-colors"
+            aria-label={language === 'es' ? 'Cerrar modal' : 'Close modal'}
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         </div>
 
-        {/* Contenido */}
-        <div className="p-6">
+        {/* Content */}
+        <div className="p-4 max-h-[80vh] overflow-y-auto">
           <p className="text-gray-700 mb-6">
             Para ver el demo en VIVO de los productos, aprueba el CAPTCHA y regístrate:
           </p>
@@ -218,7 +215,6 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
               />
             </div>
             
-            {/* Checkboxes para aceptar términos y política de privacidad */}
             <div className="space-y-2">
               <div className="flex items-start">
                 <div className="flex items-center h-5">
@@ -277,7 +273,6 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
               )}
             </div>
             
-            {/* CAPTCHA */}
             <div className="mt-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Verificación CAPTCHA

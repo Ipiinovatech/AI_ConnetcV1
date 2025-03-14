@@ -4,50 +4,50 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary Colors
+        // Primary Blue - Main brand color
         primary: {
-          50: '#eef7ff',
-          100: '#d9edff',
-          200: '#bce0ff',
-          300: '#8accff',
-          400: '#54b0ff',
-          500: '#2d8fff',
-          600: '#1670e0',
-          700: '#1358c4',
-          800: '#154a9c',
-          900: '#173f7a',
-          950: '#0f2851',
-          DEFAULT: '#1358c4'
+          50: '#EEF5FC',
+          100: '#DCEAF9',
+          200: '#B9D6F3',
+          300: '#96C1ED',
+          400: '#73ACE7',
+          500: '#0066CC', // Base color from reference
+          600: '#0052A3',
+          700: '#003D7A',
+          800: '#002952',
+          900: '#001429',
+          950: '#000A14',
+          DEFAULT: '#0066CC'
         },
-        // Accent Colors
-        accent: {
-          50: '#f0f7ff',
-          100: '#e0eeff',
-          200: '#baddff',
-          300: '#7dc2ff',
-          400: '#3aa1ff',
-          500: '#0b7fff',
-          600: '#005ff2',
-          700: '#004ad1',
-          800: '#003eab',
-          900: '#00368a',
-          950: '#002155',
-          DEFAULT: '#005ff2'
+        // Secondary Blue - Used for accents and highlights
+        secondary: {
+          50: '#E6F1FF',
+          100: '#CCE4FF',
+          200: '#99C8FF',
+          300: '#66ADFF',
+          400: '#3391FF',
+          500: '#0076FF', // Secondary color from reference
+          600: '#005ECC',
+          700: '#004799',
+          800: '#002F66',
+          900: '#001833',
+          950: '#000C1A',
+          DEFAULT: '#0076FF'
         },
-        // Dark Theme Colors
+        // Dark Blue - Used for text and backgrounds
         dark: {
-          50: '#f6f8fc',
-          100: '#edf0f7',
-          200: '#d8dfe9',
-          300: '#b6c4d7',
-          400: '#8fa3c0',
-          500: '#7185aa',
-          600: '#5a6c91',
-          700: '#4a5876',
-          800: '#404b63',
-          900: '#384154',
-          950: '#252b39',
-          DEFAULT: '#252b39'
+          50: '#E6EDF5',
+          100: '#CCDAEB',
+          200: '#99B5D6',
+          300: '#6690C2',
+          400: '#336BAD',
+          500: '#004699', // Dark blue from reference
+          600: '#00387A',
+          700: '#002A5C',
+          800: '#001C3D',
+          900: '#000E1F',
+          950: '#00070F',
+          DEFAULT: '#004699'
         }
       }
     },

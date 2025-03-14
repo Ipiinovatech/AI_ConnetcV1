@@ -3,12 +3,12 @@ import { getAuth, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDXQAhmXUBSFbcRjYcA-4PVUe7XiJ4Jh-8",
-  authDomain: "ai-connect-auth-demo.firebaseapp.com",
-  projectId: "ai-connect-auth-demo",
-  storageBucket: "ai-connect-auth-demo.appspot.com",
-  messagingSenderId: "123456789012",
-  appId: "1:123456789012:web:abcdef1234567890abcdef"
+  apiKey: "AIzaSyBZrJp4hLj1J_cW_0fPM3dB-jZWZCpwQT0",
+  authDomain: "ai-connect-auth.firebaseapp.com",
+  projectId: "ai-connect-auth",
+  storageBucket: "ai-connect-auth.appspot.com",
+  messagingSenderId: "850612790408",
+  appId: "1:850612790408:web:2f4b9b8b8b8b8b8b8b8b8b"
 };
 
 // Initialize Firebase

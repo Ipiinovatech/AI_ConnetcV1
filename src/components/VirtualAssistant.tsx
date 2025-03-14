@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { X, MessageSquare, Send, RefreshCw, ExternalLink } from 'lucide-react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 interface FormData {
   nombre: string;
@@ -28,17 +29,16 @@ const VirtualAssistant = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [termsError, setTermsError] = useState('');
+  const { language } = useLanguage();
 
-  // Cargar CAPTCHA solo cuando el componente está abierto y montado
   useEffect(() => {
     if (isOpen && captchaRef.current) {
-      // Pequeño retraso para asegurar que el DOM esté listo
       const timer = setTimeout(() => {
         try {
           loadCaptchaEnginge(6);
           setCaptchaLoaded(true);
         } catch (error) {
-          console.error("Error al cargar CAPTCHA:", error);
+          console.error("Error loading CAPTCHA:", error);
         }
       }, 100);
       
@@ -50,7 +50,6 @@ const VirtualAssistant = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Limpiar error cuando el usuario comienza a escribir
     if (errors[name as keyof FormData]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -64,7 +63,6 @@ const VirtualAssistant = () => {
       setPrivacyAccepted(checked);
     }
     
-    // Limpiar error de términos si alguno de los checkboxes es marcado
     if (checked) {
       setTermsError('');
     }
@@ -74,21 +72,21 @@ const VirtualAssistant = () => {
     const newErrors: Partial<FormData> = {};
     
     if (!formData.nombre.trim()) {
-      newErrors.nombre = 'El nombre es requerido';
+      newErrors.nombre = language === 'es' ? 'El nombre es requerido' : 'Name is required';
     }
     
     if (!formData.correo.trim()) {
-      newErrors.correo = 'El correo es requerido';
+      newErrors.correo = language === 'es' ? 'El correo es requerido' : 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.correo)) {
-      newErrors.correo = 'El correo no es válido';
+      newErrors.correo = language === 'es' ? 'El correo no es válido' : 'Invalid email format';
     }
     
     if (!formData.pais.trim()) {
-      newErrors.pais = 'El país es requerido';
+      newErrors.pais = language === 'es' ? 'El país es requerido' : 'Country is required';
     }
     
     if (!formData.mensaje.trim()) {
-      newErrors.mensaje = 'El mensaje es requerido';
+      newErrors.mensaje = language === 'es' ? 'El mensaje es requerido' : 'Message is required';
     }
     
     setErrors(newErrors);
@@ -99,7 +97,7 @@ const VirtualAssistant = () => {
     e.preventDefault();
     
     if (validateForm()) {
-      console.log('Formulario enviado:', formData);
+      console.log('Form submitted:', formData);
       setStep('success');
     }
   };
@@ -107,9 +105,10 @@ const VirtualAssistant = () => {
   const handleCaptchaSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Verificar que se hayan aceptado los términos y la política de privacidad
     if (!termsAccepted || !privacyAccepted) {
-      setTermsError('Debes aceptar los Términos y Condiciones y la Política de Privacidad para continuar.');
+      setTermsError(language === 'es' 
+        ? 'Debes aceptar los Términos y Condiciones y la Política de Privacidad para continuar.'
+        : 'You must accept the Terms and Conditions and Privacy Policy to continue.');
       return;
     }
     
@@ -117,7 +116,9 @@ const VirtualAssistant = () => {
       setCaptchaError('');
       setStep('form');
     } else {
-      setCaptchaError('El código CAPTCHA no es correcto');
+      setCaptchaError(language === 'es' 
+        ? 'El código CAPTCHA no es correcto'
+        : 'Invalid CAPTCHA code');
     }
   };
 
@@ -128,7 +129,7 @@ const VirtualAssistant = () => {
         setFormData(prev => ({ ...prev, captcha: '' }));
         setCaptchaError('');
       } catch (error) {
-        console.error("Error al refrescar CAPTCHA:", error);
+        console.error("Error refreshing CAPTCHA:", error);
       }
     }
   };
@@ -148,14 +149,13 @@ const VirtualAssistant = () => {
     setPrivacyAccepted(false);
     setStep('captcha');
     
-    // Solo intentar cargar el CAPTCHA si el componente está abierto
     if (isOpen && captchaRef.current) {
       try {
         setTimeout(() => {
           loadCaptchaEnginge(6);
         }, 100);
       } catch (error) {
-        console.error("Error al reiniciar CAPTCHA:", error);
+        console.error("Error resetting CAPTCHA:", error);
       }
     }
   };
@@ -164,62 +164,53 @@ const VirtualAssistant = () => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
     
-    // Si estamos abriendo el asistente, reiniciamos el formulario
     if (newIsOpen) {
-      setFormData({
-        nombre: '',
-        correo: '',
-        pais: '',
-        mensaje: '',
-        captcha: ''
-      });
-      setErrors({});
-      setCaptchaError('');
-      setTermsError('');
-      setTermsAccepted(false);
-      setPrivacyAccepted(false);
-      setStep('captcha');
-      setCaptchaLoaded(false);
+      resetAssistant();
     }
   };
 
   return (
     <>
-      {/* Botón flotante para abrir el asistente */}
+      {/* Floating Button - Centered on Mobile */}
       <button
         onClick={toggleAssistant}
-        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg z-50 transition-all duration-300 transform hover:scale-110"
-        aria-label="Abrir asistente virtual"
+        className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full py-2 px-4 shadow-lg z-50 transition-all duration-300 hover:shadow-xl active:scale-95 md:bottom-6 md:left-auto md:right-6 md:transform-none flex items-center space-x-2"
+        aria-label={language === 'es' ? 'Abrir asistente virtual' : 'Open virtual assistant'}
       >
-        <MessageSquare size={24} />
+        <MessageSquare size={20} className="text-white" />
+        <span className="text-sm font-medium md:hidden">
+          {language === 'es' ? 'Asistente Virtual' : 'Virtual Assistant'}
+        </span>
       </button>
 
-      {/* Ventana del asistente virtual */}
+      {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-full max-w-sm bg-white rounded-xl shadow-2xl z-50 overflow-hidden transition-all duration-300 animate-fade-in">
-          {/* Encabezado */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 flex justify-between items-center">
+        <div className="fixed inset-x-4 bottom-20 md:bottom-24 md:right-6 md:left-auto w-auto max-w-sm bg-white rounded-xl shadow-2xl z-50 overflow-hidden transition-all duration-300 animate-fade-in">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 flex justify-between items-center">
             <div className="flex items-center">
-              <div className="bg-white rounded-full w-8 h-8 flex items-center justify-center mr-2">
-                <span className="text-blue-700 font-bold text-sm">AI</span>
+              <div className="bg-white/90 rounded-full w-8 h-8 flex items-center justify-center mr-2">
+                <span className="text-blue-600 font-bold text-sm">AI</span>
               </div>
-              <h3 className="font-semibold">Asistente Virtual</h3>
+              <h3 className="font-medium text-sm">
+                {language === 'es' ? 'Asistente Virtual' : 'Virtual Assistant'}
+              </h3>
             </div>
             <button 
               onClick={toggleAssistant}
-              className="text-white hover:text-gray-200 transition-colors"
-              aria-label="Cerrar asistente"
+              className="text-white/80 hover:text-white transition-colors"
+              aria-label={language === 'es' ? 'Cerrar asistente' : 'Close assistant'}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
 
-          {/* Contenido */}
-          <div className="p-4 max-h-[400px] overflow-y-auto">
+          <div className="p-4 max-h-[70vh] overflow-y-auto">
             {step === 'captcha' && (
               <div className="space-y-4">
-                <p className="text-gray-700">
-                  Para continuar, por favor complete la verificación CAPTCHA:
+                <p className="text-gray-700 text-sm">
+                  {language === 'es'
+                    ? 'Para continuar, por favor complete la verificación CAPTCHA:'
+                    : 'To continue, please complete the CAPTCHA verification:'}
                 </p>
                 
                 <form onSubmit={handleCaptchaSubmit} className="space-y-4">
@@ -232,7 +223,7 @@ const VirtualAssistant = () => {
                       type="button" 
                       onClick={refreshCaptcha}
                       className="p-2 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors"
-                      aria-label="Refrescar CAPTCHA"
+                      aria-label={language === 'es' ? 'Refrescar CAPTCHA' : 'Refresh CAPTCHA'}
                     >
                       <RefreshCw size={18} />
                     </button>
@@ -242,7 +233,7 @@ const VirtualAssistant = () => {
                       name="captcha"
                       value={formData.captcha}
                       onChange={handleChange}
-                      placeholder="Ingrese el código"
+                      placeholder={language === 'es' ? 'Ingrese el código' : 'Enter the code'}
                       className={`flex-1 px-3 py-2 border ${captchaError ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                       required
                     />
@@ -252,7 +243,6 @@ const VirtualAssistant = () => {
                     <p className="text-red-500 text-sm">{captchaError}</p>
                   )}
                   
-                  {/* Checkboxes para aceptar términos y política de privacidad */}
                   <div className="space-y-2">
                     <div className="flex items-start">
                       <div className="flex items-center h-5">
@@ -267,13 +257,15 @@ const VirtualAssistant = () => {
                       </div>
                       <div className="ml-3 text-sm">
                         <label htmlFor="terms" className="text-gray-700">
-                          He leído y acepto los{' '}
+                          {language === 'es' 
+                            ? 'He leído y acepto los '
+                            : 'I have read and accept the '}
                           <Link 
                             to="/terminos-y-condiciones" 
                             target="_blank" 
                             className="text-blue-600 hover:text-blue-800 inline-flex items-center"
                           >
-                            Términos y Condiciones
+                            {language === 'es' ? 'Términos y Condiciones' : 'Terms and Conditions'}
                             <ExternalLink size={12} className="ml-1" />
                           </Link>
                         </label>
@@ -293,13 +285,15 @@ const VirtualAssistant = () => {
                       </div>
                       <div className="ml-3 text-sm">
                         <label htmlFor="privacy" className="text-gray-700">
-                          He leído y acepto la{' '}
+                          {language === 'es'
+                            ? 'He leído y acepto la '
+                            : 'I have read and accept the '}
                           <Link 
                             to="/politica-de-privacidad" 
                             target="_blank" 
                             className="text-blue-600 hover:text-blue-800 inline-flex items-center"
                           >
-                            Política de Privacidad
+                            {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
                             <ExternalLink size={12} className="ml-1" />
                           </Link>
                         </label>
@@ -313,9 +307,9 @@ const VirtualAssistant = () => {
                   
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors text-sm"
                   >
-                    Verificar
+                    {language === 'es' ? 'Verificar' : 'Verify'}
                   </button>
                 </form>
               </div>
@@ -325,7 +319,7 @@ const VirtualAssistant = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
-                    Nombre completo
+                    {language === 'es' ? 'Nombre completo' : 'Full name'}
                   </label>
                   <input
                     type="text"
@@ -340,7 +334,7 @@ const VirtualAssistant = () => {
                 
                 <div>
                   <label htmlFor="correo" className="block text-sm font-medium text-gray-700 mb-1">
-                    Correo electrónico
+                    {language === 'es' ? 'Correo electrónico' : 'Email'}
                   </label>
                   <input
                     type="email"
@@ -355,7 +349,7 @@ const VirtualAssistant = () => {
                 
                 <div>
                   <label htmlFor="pais" className="block text-sm font-medium text-gray-700 mb-1">
-                    País
+                    {language === 'es' ? 'País' : 'Country'}
                   </label>
                   <select
                     id="pais"
@@ -364,22 +358,22 @@ const VirtualAssistant = () => {
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${errors.pais ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                   >
-                    <option value="">Seleccione un país</option>
+                    <option value="">{language === 'es' ? 'Seleccione un país' : 'Select a country'}</option>
                     <option value="Colombia">Colombia</option>
                     <option value="México">México</option>
                     <option value="Argentina">Argentina</option>
                     <option value="Chile">Chile</option>
                     <option value="Perú">Perú</option>
                     <option value="España">España</option>
-                    <option value="Estados Unidos">Estados Unidos</option>
-                    <option value="Otro">Otro</option>
+                    <option value="Estados Unidos">United States</option>
+                    <option value="Otro">{language === 'es' ? 'Otro' : 'Other'}</option>
                   </select>
                   {errors.pais && <p className="text-red-500 text-sm mt-1">{errors.pais}</p>}
                 </div>
                 
                 <div>
                   <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">
-                    Mensaje
+                    {language === 'es' ? 'Mensaje' : 'Message'}
                   </label>
                   <textarea
                     id="mensaje"
@@ -394,10 +388,10 @@ const VirtualAssistant = () => {
                 
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center text-sm"
                 >
                   <Send size={18} className="mr-2" />
-                  Enviar mensaje
+                  {language === 'es' ? 'Enviar mensaje' : 'Send message'}
                 </button>
               </form>
             )}
@@ -409,15 +403,19 @@ const VirtualAssistant = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800">¡Mensaje enviado!</h3>
-                <p className="text-gray-600">
-                  Gracias por contactarnos, {formData.nombre}. Nos pondremos en contacto contigo a la brevedad posible.
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {language === 'es' ? '¡Mensaje enviado!' : 'Message sent!'}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {language === 'es'
+                    ? `Gracias por contactarnos, ${formData.nombre}. Nos pondremos en contacto contigo a la brevedad posible.`
+                    : `Thank you for contacting us, ${formData.nombre}. We will get back to you as soon as possible.`}
                 </p>
                 <button
                   onClick={resetAssistant}
-                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors text-sm"
                 >
-                  Enviar otro mensaje
+                  {language === 'es' ? 'Enviar otro mensaje' : 'Send another message'}
                 </button>
               </div>
             )}

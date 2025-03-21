@@ -67,7 +67,7 @@ const Header = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img 
-                src="/images/AI CONNECT FINAL.png"
+                src="/Public/images/AI CONNECT FINAL.png"
                 alt="AI Connect"
                 className="h-16 md:h-20 object-contain transition-all duration-300"
                 style={{ filter: 'brightness(1.05)' }}

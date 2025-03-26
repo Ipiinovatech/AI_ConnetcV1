@@ -11,20 +11,20 @@ const ProductsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   
   const productos = [
-    { nombre: "InfluAI", imagen: "/Public/Images/InfluAI.jpeg" },
-    { nombre: "TrueSing", imagen: "/Public/Images/TrueSing.jpeg" },
-    { nombre: "CyberAI", imagen: "/Public/Images/CyberAI.jpeg" },
-    { nombre: "AvAI", imagen: "/Public/Images/AvAI.jpeg" },
-    { nombre: "AI Trainer", imagen: "/Public/Images/AI Trainer.jpeg" },
-    { nombre: "AI Vision", imagen: "/Public/Images/AI Vision.jpeg" },
-    { nombre: "AsistAI", imagen: "/Public/Images/AsistAI.jpeg" },
-    { nombre: "db-ai", imagen: "/Public/Images/db-ai.jpeg" },
-    { nombre: "ProcessAI", imagen: "/Public/Images/ProcessAI.jpeg" },
-    { nombre: "SellAI", imagen: "/Public/Images/SellAI.jpeg" },
-    { nombre: "TestQAI", imagen: "/Public/Images/TestQAI.jpeg" },
-    { nombre: "MultimediaAI", imagen: "/Public/Images/MultimediAI.jpeg" },
-    { nombre: "MulticonnectAI", imagen: "/Public/Images/MulticonnectAI.jpeg" },
-    { nombre: "FaceIA", imagen: "/Public/Images/FaceIA.jpeg" }
+    { nombre: "InfluAI", imagen: "/Public/images/InfluAI.jpeg" },
+    { nombre: "TrueSing", imagen: "/Public/images/TrueSing.jpeg" },
+    { nombre: "CyberAI", imagen: "/Public/images/CyberAI.jpeg" },
+    { nombre: "AvAI", imagen: "/Public/images/AvAI.jpeg" },
+    { nombre: "AI Trainer", imagen: "/Public/images/AI Trainer.jpeg" },
+    { nombre: "AI Vision", imagen: "/Public/images/AI Vision.jpeg" },
+    { nombre: "AsistAI", imagen: "/Public/images/AsistAI.jpeg" },
+    { nombre: "db-ai", imagen: "/Public/images/db-ai.jpeg" },
+    { nombre: "ProcessAI", imagen: "/Public/images/ProcessAI.jpeg" },
+    { nombre: "SellAI", imagen: "/Public/images/SellAI.jpeg" },
+    { nombre: "TestQAI", imagen: "/Public/images/TestQAI.jpeg" },
+    { nombre: "MultimediaAI", imagen: "/Public/images/MultimediAI.jpeg" },
+    { nombre: "MulticonnectAI", imagen: "/Public/images/MulticonnectAI.jpeg" },
+    { nombre: "FaceIA", imagen: "/Public/images/FaceIA.jpeg" }
   ];
 
   return (

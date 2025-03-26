@@ -37,7 +37,7 @@ const ProductsPage = () => {
             <div className="flex items-center">
               <Link to="/" className="flex items-center">
                 <img 
-                  src="/Public/Images/AI CONNECT FINAL.png"
+                  src="/Public/images/AI CONNECT FINAL.png"
                   alt="AI Connect"
                   className="h-16 md:h-20 object-contain transition-all duration-300"
                   style={{ filter: 'brightness(1.05)' }}
@@ -77,7 +77,7 @@ const ProductsPage = () => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <img 
-              src="/Public/Images/AI CONNECT FINAL.png"
+              src="/Public/images/AI CONNECT FINAL.png"
               alt="AI Connect"
               className="h-32 md:h-48 mx-auto mb-8 object-contain"
             />
@@ -137,9 +137,9 @@ const ProductsPage = () => {
                     <video
                       className="w-full h-full object-cover"
                       controls
-                      poster="/Public/Images/AI CONNECT FINAL.png"
+                      poster="/Public/images/AI CONNECT FINAL.png"
                     >
-                      <source src="/Public/Videos/AI CONNECT Y HOME/IA connect_1080p.mp4" type="video/mp4" />
+                      <source src="/Public/videos/AI CONNECT Y HOME/IA connect_1080p.mp4" type="video/mp4" />
                       {language === 'es' 
                         ? 'Tu navegador no soporta el elemento de video.'
                         : 'Your browser does not support the video element.'}

@@ -20,7 +20,7 @@ const HeroSection = () => {
           loop 
           muted 
           playsInline
-          poster="/Public/Images/AI CONNECT FINAL.png"
+          poster="/Public/images/AI CONNECT FINAL.png"
           controls={false}
         >
           <source src="/Public/Videos/AI CONNECT Y HOME/HOME DE AICONNECT .mp4" type="video/mp4" />
@@ -34,7 +34,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <img 
-              src="/Public/Images/AI CONNECT FINAL.png"
+              src="/Public/images/AI CONNECT FINAL.png"
               alt="AI Connect"
               className="h-32 md:h-48 mx-auto object-contain"
               style={{ filter: 'brightness(1.05)' }}

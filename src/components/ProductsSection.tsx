@@ -15,25 +15,25 @@ const ProductsSection = () => {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   
   const productos = [
-    { id: 1, nombre: "ProcessAI", imagen: "/Public/Images/ProcessAI.jpeg" },
-    { id: 2, nombre: "MulticonnectAI", imagen: "/Public/Images/MulticonnectAI.jpeg" },
-    { id: 3, nombre: "SellAI", imagen: "/Public/Images/SellAI.jpeg" },
-    { id: 4, nombre: "AI Vision", imagen: "/Public/Images/AI Vision.jpeg" },
-    { id: 5, nombre: "FaceIA", imagen: "/Public/Images/FaceIA.jpeg" },
-    { id: 6, nombre: "MultimediaAI", imagen: "/Public/Images/MultimediAI.jpeg" },
-    { id: 7, nombre: "AvAI", imagen: "/Public/Images/AvAI.jpeg" },
-    { id: 8, nombre: "CyberAI", imagen: "/Public/Images/CyberAI.jpeg" },
-    { id: 9, nombre: "TrueSing", imagen: "/Public/Images/TrueSing.jpeg" },
-    { id: 10, nombre: "InfluAI", imagen: "/Public/Images/InfluAI.jpeg" },
-    { id: 11, nombre: "TestQAI", imagen: "/Public/Images/TestQAI.jpeg" },
-    { id: 12, nombre: "AI Trainer", imagen: "/Public/Images/AI Trainer.jpeg" },
-    { id: 13, nombre: "db-ai", imagen: "/Public/Images/db-ai.jpeg" },
-    { id: 14, nombre: "VIRTUAL IPV", imagen: "/Public/Images/VIRTUAL IPV.png" },
-    { id: 15, nombre: "VIRTUAL QUALITY FIELD", imagen: "/Public/Images/VIRTUAL QUALITY FIELD.png" },
-    { id: 16, nombre: "VIRTUAL SMART VIDEO", imagen: "/Public/Images/VIRTUAL SMART VIDEO.png" },
-    { id: 17, nombre: "ANALITICA BIG DATA", imagen: "/Public/Images/ANALITICA BIG DATA.png" },
-    { id: 18, nombre: "FABRICA DE SOFTWARE", imagen: "/Public/Images/FABRICA DE SOFTWARE.png" },
-    { id: 19, nombre: "PA YA 2.0", imagen: "/Public/Images/PA YA.png" }
+    { id: 1, nombre: "ProcessAI", imagen: "/Public/images/ProcessAI.jpeg" },
+    { id: 2, nombre: "MulticonnectAI", imagen: "/Public/images/MulticonnectAI.jpeg" },
+    { id: 3, nombre: "SellAI", imagen: "/Public/images/SellAI.jpeg" },
+    { id: 4, nombre: "AI Vision", imagen: "/Public/images/AI Vision.jpeg" },
+    { id: 5, nombre: "FaceIA", imagen: "/Public/images/FaceIA.jpeg" },
+    { id: 6, nombre: "MultimediaAI", imagen: "/Public/images/MultimediAI.jpeg" },
+    { id: 7, nombre: "AvAI", imagen: "/Public/images/AvAI.jpeg" },
+    { id: 8, nombre: "CyberAI", imagen: "/Public/images/CyberAI.jpeg" },
+    { id: 9, nombre: "TrueSing", imagen: "/Public/images/TrueSing.jpeg" },
+    { id: 10, nombre: "InfluAI", imagen: "/Public/images/InfluAI.jpeg" },
+    { id: 11, nombre: "TestQAI", imagen: "/Public/images/TestQAI.jpeg" },
+    { id: 12, nombre: "AI Trainer", imagen: "/Public/images/AI Trainer.jpeg" },
+    { id: 13, nombre: "db-ai", imagen: "/Public/images/db-ai.jpeg" },
+    { id: 14, nombre: "VIRTUAL IPV", imagen: "/Public/images/VIRTUAL IPV.png" },
+    { id: 15, nombre: "VIRTUAL QUALITY FIELD", imagen: "/Public/images/VIRTUAL QUALITY FIELD.png" },
+    { id: 16, nombre: "VIRTUAL SMART VIDEO", imagen: "/Public/images/VIRTUAL SMART VIDEO.png" },
+    { id: 17, nombre: "ANALITICA BIG DATA", imagen: "/Public/images/ANALITICA BIG DATA.png" },
+    { id: 18, nombre: "FABRICA DE SOFTWARE", imagen: "/Public/images/FABRICA DE SOFTWARE.png" },
+    { id: 19, nombre: "PA YA 2.0", imagen: "/Public/images/PA YA.png" }
   ];
 
   const handleProductClick = (product: any) => {

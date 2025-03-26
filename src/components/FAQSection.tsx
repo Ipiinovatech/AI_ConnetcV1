@@ -10,18 +10,18 @@ const FAQSection = () => {
     es: [
       {
         question: "¿Qué servicios ofrece",
-        image: "/Public/Images/AI CONNECT AZUL.png",
+        image: "/Public/images/AI CONNECT AZUL.png",
         answer: "Se especializa en soluciones de inteligencia artificial personalizadas, modelos de aprendizaje automático y análisis de datos para mejorar las capacidades tecnológicas y la eficiencia de las empresas."
       },
       {
         question: "¿Cómo puede",
-        image: "/Public/Images/AI CONNECT AZUL.png",
+        image: "/Public/images/AI CONNECT AZUL.png",
         answer: "Puede automatizar tareas repetitivas, analizar grandes volúmenes de datos para obtener insights valiosos, optimizar la toma de decisiones y mejorar la experiencia del cliente a través de soluciones personalizadas de IA.",
         suffix: "ayudarme a mejorar mis procesos de negocio?"
       },
       {
         question: "¿El servicio de",
-        image: "/Public/Images/AI CONNECT AZUL.png",
+        image: "/Public/images/AI CONNECT AZUL.png",
         answer: "Sí, ofrece sus servicios a nivel internacional. Contamos con clientes en diversos países y nuestras soluciones pueden implementarse de forma remota en cualquier parte del mundo.",
         suffix: "está disponible fuera de Colombia?"
       }
@@ -29,18 +29,18 @@ const FAQSection = () => {
     en: [
       {
         question: "What services does",
-        image: "/Public/Images/AI CONNECT AZUL.png",
+        image: "/Public/images/AI CONNECT AZUL.png",
         answer: "Specializes in customized artificial intelligence solutions, machine learning models, and data analysis to enhance companies' technological capabilities and efficiency."
       },
       {
         question: "How can",
-        image: "/Public/Images/AI CONNECT AZUL.png",
+        image: "/Public/images/AI CONNECT AZUL.png",
         answer: "It can automate repetitive tasks, analyze large volumes of data to obtain valuable insights, optimize decision-making, and improve customer experience through personalized AI solutions.",
         suffix: "help improve my business processes?"
       },
       {
         question: "Is",
-        image: "/Public/Images/AI CONNECT AZUL.png",
+        image: "/Public/images/AI CONNECT AZUL.png",
         answer: "Yes, services are available internationally. We have clients in various countries, and our solutions can be implemented remotely anywhere in the world.",
         suffix: "service available outside Colombia?"
       }
@@ -75,7 +75,7 @@ const FAQSection = () => {
                   </>
                 )}
                 <img 
-                  src="/Public/Images/AI CONNECT AZUL.png" 
+                  src="/Public/images/AI CONNECT AZUL.png" 
                   alt="AI Connect"
                   className="h-32 object-contain mt-4"
                 />

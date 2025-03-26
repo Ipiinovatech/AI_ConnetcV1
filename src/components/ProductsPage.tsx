@@ -39,7 +39,7 @@ const ProductsPage = () => {
             <div className="flex items-center">
               <Link to="/" className="flex items-center">
                 <img 
-                  src="/Public/Images/AI CONNECT BLANCO.png"
+                  src="/Public/images/AI CONNECT BLANCO.png"
                   alt="AI Connect"
                   className="h-16 md:h-20 object-contain transition-all duration-300"
                   style={{ filter: 'brightness(1.05)' }}

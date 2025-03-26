@@ -32,7 +32,7 @@ const ProjectsPage = () => {
       id: 1,
       name: "ProcessAI",
       category: "ai-connect",
-      image: "/Public/Images/ProcessAI.jpeg",
+      image: "/Public/images/ProcessAI.jpeg",
       summary: {
         es: "Sistema avanzado de automatización inteligente de procesos empresariales que optimiza operaciones y reduce costos.",
         en: "Advanced intelligent business process automation system that optimizes operations and reduces costs."
@@ -46,7 +46,7 @@ const ProjectsPage = () => {
       id: 2,
       name: "MulticonnectAI",
       category: "ai-connect",
-      image: "/Public/Images/MulticonnectAI.jpeg",
+      image: "/Public/images/MulticonnectAI.jpeg",
       summary: {
         es: "Plataforma integral de conectividad múltiple que integra canales de comunicación con inteligencia artificial avanzada.",
         en: "Comprehensive multi-connectivity platform that integrates communication channels with advanced artificial intelligence."
@@ -60,7 +60,7 @@ const ProjectsPage = () => {
       id: 3,
       name: "SellAI",
       category: "ai-connect",
-      image: "/Public/Images/SellAI.jpeg",
+      image: "/Public/images/SellAI.jpeg",
       summary: {
         es: "Sistema de ventas potenciado por IA para optimizar procesos comerciales y aumentar conversiones.",
         en: "AI-powered sales system to optimize business processes and increase conversions."
@@ -74,7 +74,7 @@ const ProjectsPage = () => {
       id: 4,
       name: "AI Vision",
       category: "ai-connect",
-      image: "/Public/Images/AI Vision.jpeg",
+      image: "/Public/images/AI Vision.jpeg",
       summary: {
         es: "Sistema de visión artificial que analiza imágenes y videos para extraer información valiosa y automatizar procesos visuales.",
         en: "Computer vision system that analyzes images and videos to extract valuable information and automate visual processes."
@@ -88,7 +88,7 @@ const ProjectsPage = () => {
       id: 5,
       name: "FaceIA",
       category: "ai-connect",
-      image: "/Public/Images/FaceIA.jpeg",
+      image: "/Public/images/FaceIA.jpeg",
       summary: {
         es: "Sistema avanzado de reconocimiento facial con detección de vida para verificación de identidad segura.",
         en: "Advanced facial recognition system with liveness detection for secure identity verification."
@@ -102,7 +102,7 @@ const ProjectsPage = () => {
       id: 6,
       name: "MultimediaAI",
       category: "ai-connect",
-      image: "/Public/Images/MultimediAI.jpeg",
+      image: "/Public/images/MultimediAI.jpeg",
       summary: {
         es: "Plataforma de creación y edición de contenido multimedia con IA para resultados profesionales.",
         en: "AI-powered multimedia content creation and editing platform for professional results."
@@ -116,7 +116,7 @@ const ProjectsPage = () => {
       id: 7,
       name: "AvAI",
       category: "varios",
-      image: "/Public/Images/AvAI.jpeg",
+      image: "/Public/images/AvAI.jpeg",
       summary: {
         es: "Avatares inteligentes para interacciones digitales más naturales y personalizadas.",
         en: "Intelligent avatars for more natural and personalized digital interactions."
@@ -130,7 +130,7 @@ const ProjectsPage = () => {
       id: 8,
       name: "CyberAI",
       category: "varios",
-      image: "/Public/Images/CyberAI.jpeg",
+      image: "/Public/images/CyberAI.jpeg",
       summary: {
         es: "Protección cibernética avanzada con IA para detectar y prevenir amenazas en tiempo real.",
         en: "Advanced AI-powered cyber protection to detect and prevent threats in real-time."
@@ -144,7 +144,7 @@ const ProjectsPage = () => {
       id: 9,
       name: "TrueSing",
       category: "varios",
-      image: "/Public/Images/TrueSing.jpeg",
+      image: "/Public/images/TrueSing.jpeg",
       summary: {
         es: "Sistema de firmas digitales con IA para autenticación segura de documentos y contenido.",
         en: "AI-powered digital signature system for secure document and content authentication."
@@ -158,7 +158,7 @@ const ProjectsPage = () => {
       id: 10,
       name: "InfluAI",
       category: "varios",
-      image: "/Public/Images/InfluAI.jpeg",
+      image: "/Public/images/InfluAI.jpeg",
       summary: {
         es: "Gestión y análisis de campañas de influencers con IA para optimizar resultados.",
         en: "AI-powered influencer campaign management and analysis to optimize results."
@@ -172,7 +172,7 @@ const ProjectsPage = () => {
       id: 11,
       name: "TestQAI",
       category: "varios",
-      image: "/Public/Images/TestQAI.jpeg",
+      image: "/Public/images/TestQAI.jpeg",
       summary: {
         es: "Sistema automatizado de pruebas y control de calidad para software con IA.",
         en: "Automated AI-powered testing and quality control system for software."
@@ -186,7 +186,7 @@ const ProjectsPage = () => {
       id: 12,
       name: "AI Trainer",
       category: "varios",
-      image: "/Public/Images/AI Trainer.jpeg",
+      image: "/Public/images/AI Trainer.jpeg",
       summary: {
         es: "Plataforma de entrenamiento personalizado con IA para desarrollo profesional.",
         en: "AI-powered personalized training platform for professional development."
@@ -201,7 +201,7 @@ const ProjectsPage = () => {
       id: 13,
       name: "db-ai",
       category: "varios",
-      image: "/Public/Images/db-ai.jpeg",
+      image: "/Public/images/db-ai.jpeg",
       summary: {
         es: "Gestión inteligente de bases de datos para optimizar rendimiento y eficiencia.",
         en: "Intelligent database management to optimize performance and efficiency."
@@ -215,7 +215,7 @@ const ProjectsPage = () => {
       id: 14,
       name: "VIRTUAL IPV",
       category: "varios",
-      image: "/Public/Images/VIRTUAL IPV.png",
+      image: "/Public/images/VIRTUAL IPV.png",
       summary: {
         es: "Sistema de protección virtual contra violencia con monitoreo en tiempo real.",
         en: "Virtual violence protection system with real-time monitoring."
@@ -229,7 +229,7 @@ const ProjectsPage = () => {
       id: 15,
       name: "VIRTUAL QUALITY FIELD",
       category: "varios",
-      image: "/Public/Images/VIRTUAL QUALITY FIELD.png",
+      image: "/Public/images/VIRTUAL QUALITY FIELD.png",
       summary: {
         es: "Control de calidad automatizado para operaciones de campo con IA.",
         en: "Automated quality control for field operations with AI."
@@ -243,7 +243,7 @@ const ProjectsPage = () => {
       id: 16,
       name: "VIRTUAL SMART VIDEO",
       category: "varios",
-      image: "/Public/Images/VIRTUAL SMART VIDEO.png",
+      image: "/Public/images/VIRTUAL SMART VIDEO.png",
       summary: {
         es: "Análisis inteligente de video para detección de patrones y eventos.",
         en: "Intelligent video analysis for pattern and event detection."
@@ -257,7 +257,7 @@ const ProjectsPage = () => {
       id: 17,
       name: "ANALITICA BIG DATA",
       category: "varios",
-      image: "/Public/Images/ANALITICA BIG DATA.png",
+      image: "/Public/images/ANALITICA BIG DATA.png",
       summary: {
         es: "Análisis avanzado de grandes volúmenes de datos para insights empresariales.",
         en: "Advanced analysis of large data volumes for business insights."
@@ -271,7 +271,7 @@ const ProjectsPage = () => {
       id: 18,
       name: "FABRICA DE SOFTWARE",
       category: "varios",
-      image: "/Public/Images/FABRICA DE SOFTWARE.png",
+      image: "/Public/images/FABRICA DE SOFTWARE.png",
       summary: {
         es: "Desarrollo automatizado de software con IA para mayor eficiencia.",
         en: "Automated software development with AI for greater efficiency."
@@ -285,7 +285,7 @@ const ProjectsPage = () => {
       id: 19,
       name: "PA YA 2.0",
       category: "varios",
-      image: "/Public/Images/PA YA.png",
+      image: "/Public/images/PA YA.png",
       summary: {
         es: "Sistema de pagos inteligente para transacciones seguras y eficientes.",
         en: "Intelligent payment system for secure and efficient transactions."
@@ -324,7 +324,7 @@ const ProjectsPage = () => {
             <div className="flex items-center">
               <Link to="/" className="flex items-center">
                 <img 
-                  src="/Public/Images/AI CONNECT FINAL.png"
+                  src="/Public/images/AI CONNECT FINAL.png"
                   alt="AI Connect"
                   className="h-16 md:h-20 object-contain transition-all duration-300"
                   style={{ filter: 'brightness(1.05)' }}

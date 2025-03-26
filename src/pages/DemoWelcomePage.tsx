@@ -24,7 +24,7 @@ const DemoWelcomePage = () => {
 
   // Map of product demo videos
   const productDemos = {
-    'SellAI': '/Public/Videos/DEMOSTRACION/DEMOSellAI.mp4'
+    'SellAI': '/Public/videos/DEMOSTRACION/DEMOSellAI.mp4'
     // Add more product demos here as they become available
   };
 
@@ -193,7 +193,7 @@ const DemoWelcomePage = () => {
                   ref={videoRef}
                   className="w-full h-full object-cover"
                   src={productDemos[productName]}
-                  poster={`/Public/Images/${productName}.jpeg`}
+                  poster={`/Public/images/${productName}.jpeg`}
                   onEnded={handleVideoEnd}
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}

@@ -51,80 +51,80 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
   const getProductVideos = (productName: string) => {
     const videos = {
       'ProcessAI': {
-        es: '/Public/Videos/PROCESSAI/1. Optimizacin y Automatizacin de Procesos_1080p.mp4',
-        en: '/Public/Videos/PROCESSAI/1. Process Optimization and Automation_1080p.mp4'
+        es: '/Public/videos/PROCESSAI/1. Optimizacin y Automatizacin de Procesos_1080p.mp4',
+        en: '/Public/videos/PROCESSAI/1. Process Optimization and Automation_1080p.mp4'
       },
       'MulticonnectAI': {
-        es: '/Public/Videos/MulticonnectAI/2. Agentes Inteligentes Multicanal (ESPAOL)_1080p.mp4',
-        en: '/Public/Videos/MulticonnectAI/2. Multichannel Intelligent Agents (INGLES)_1080p.mp4'
+        es: '/Public/videos/MulticonnectAI/2. Agentes Inteligentes Multicanal (ESPAOL)_1080p.mp4',
+        en: '/Public/videos/MulticonnectAI/2. Multichannel Intelligent Agents (INGLES)_1080p.mp4'
       },
       'SellAI': {
-        es: '/Public/Videos/SellAI/3. Agente IA de Ventas Multicanal_1080p.mp4',
-        en: '/Public/Videos/SellAI/3. Multichannel Sales AI Agent_1080p.mp4'
+        es: '/Public/videos/SellAI/3. Agente IA de Ventas Multicanal_1080p.mp4',
+        en: '/Public/videos/SellAI/3. Multichannel Sales AI Agent_1080p.mp4'
       },
       'AI Vision': {
-        es: '/Public/Videos/AI Vision/4. Servicios de Visin Artificial_1080p.mp4',
-        en: '/Public/Videos/AI Vision/4. Artificial Vision Services (INGLES)_1080p.mp4'
+        es: '/Public/videos/AI Vision/4. Servicios de Visin Artificial_1080p.mp4',
+        en: '/Public/videos/AI Vision/4. Artificial Vision Services (INGLES)_1080p.mp4'
       },
       'FaceIA': {
-        es: '/Public/Videos/FaceIA/5. Servicio de Reconocimiento Facial_1080p.mp4',
-        en: '/Public/Videos/FaceIA/5. Facial Recognition Service_1080p.mp4'
+        es: '/Public/videos/FaceIA/5. Servicio de Reconocimiento Facial_1080p.mp4',
+        en: '/Public/videos/FaceIA/5. Facial Recognition Service_1080p.mp4'
       },
       'MultimediaAI': {
-        es: '/Public/Videos/Multimedia AI/6. Generacion Multimodal con IA_1080p.mp4',
-        en: '/Public/Videos/Multimedia AI/6. Multimodal Generation with AI_1080p.mp4'
+        es: '/Public/videos/Multimedia AI/6. Generacion Multimodal con IA_1080p.mp4',
+        en: '/Public/videos/Multimedia AI/6. Multimodal Generation with AI_1080p.mp4'
       },
       'AvAI': {
-        es: '/Public/Videos/AvAI/7. Avatares de IA_1080p.mp4',
-        en: '/Public/Videos/AvAI/7. Avatars with AI_1080p.mp4'
+        es: '/Public/videos/AvAI/7. Avatares de IA_1080p.mp4',
+        en: '/Public/videos/AvAI/7. Avatars with AI_1080p.mp4'
       },
       'CyberAI': {
-        es: '/Public/Videos/CyberAI/8. Ciberseguridad Potenciada con IA_1080p.mp4',
-        en: '/Public/Videos/CyberAI/8. AIPowered Cybersecurity_1080p.mp4'
+        es: '/Public/videos/CyberAI/8. Ciberseguridad Potenciada con IA_1080p.mp4',
+        en: '/Public/videos/CyberAI/8. AIPowered Cybersecurity_1080p.mp4'
       },
       'TrueSing': {
-        es: '/Public/Videos/TrueSing/9. Firmas Digitales con IA_1080p.mp4',
-        en: '/Public/Videos/TrueSing/9. Digital Signatures with AI_1080p.mp4'
+        es: '/Public/videos/TrueSing/9. Firmas Digitales con IA_1080p.mp4',
+        en: '/Public/videos/TrueSing/9. Digital Signatures with AI_1080p.mp4'
       },
       'InfluAI': {
-        es: '/Public/Videos/InfluAI/10. Influencers de IA para Redes Sociales_1080p.mp4',
-        en: '/Public/Videos/InfluAI/10. AI Influencers for Social Media_1080p.mp4'
+        es: '/Public/videos/InfluAI/10. Influencers de IA para Redes Sociales_1080p.mp4',
+        en: '/Public/videos/InfluAI/10. AI Influencers for Social Media_1080p.mp4'
       },
       'db-ai': {
-        es: '/Public/Videos/db-ai/11. Bases de Datos Vectoriales(RAG) con Inteligencia Artificial_1080p.mp4',
-        en: '/Public/Videos/db-ai/11. Vector Databases (RAG) with Artificial Intelligence_1080p.mp4'
+        es: '/Public/videos/db-ai/11. Bases de Datos Vectoriales(RAG) con Inteligencia Artificial_1080p.mp4',
+        en: '/Public/videos/db-ai/11. Vector Databases (RAG) with Artificial Intelligence_1080p.mp4'
       },
       'TestQAI': {
-        es: '/Public/Videos/TestQAAI/12. Agentes de QA testing con IA_1080p.mp4',
-        en: '/Public/Videos/TestQAAI/12. QA testing agents with AI_1080p.mp4'
+        es: '/Public/videos/TestQAAI/12. Agentes de QA testing con IA_1080p.mp4',
+        en: '/Public/videos/TestQAAI/12. QA testing agents with AI_1080p.mp4'
       },
       'AI Trainer': {
-        es: '/Public/Videos/AI Trainer/13. Capacitacin en Inteligencia Artificial_1080p.mp4',
-        en: '/Public/Videos/AI Trainer/13. Artificial Intelligence Training_1080p.mp4'
+        es: '/Public/videos/AI Trainer/13. Capacitacin en Inteligencia Artificial_1080p.mp4',
+        en: '/Public/videos/AI Trainer/13. Artificial Intelligence Training_1080p.mp4'
       },
       'PA YA 2.0': {
-        es: '/Public/Videos/pa_ya/14_PAYA!_1080p.mp4',
-        en: '/Public/Videos/pa_ya/14_PAYA! INGLES_1080p.mp4'
+        es: '/Public/videos/pa_ya/14_PAYA!_1080p.mp4',
+        en: '/Public/videos/pa_ya/14_PAYA! INGLES_1080p.mp4'
       },
       'FABRICA DE SOFTWARE': {
-        es: '/Public/Videos/FABRICA DE SOFTWARE/15. FABRICA DE SOFTWARE_1080p.mp4',
-        en: '/Public/Videos/FABRICA DE SOFTWARE/15. SOFTWARE FACTORY_1080p.mp4'
+        es: '/Public/videos/FABRICA DE SOFTWARE/15. FABRICA DE SOFTWARE_1080p.mp4',
+        en: '/Public/videos/FABRICA DE SOFTWARE/15. SOFTWARE FACTORY_1080p.mp4'
       },
       'VIRTUAL SMART VIDEO': {
-        es: '/Public/Videos/VIRTUAL SMART VIDEO/16. VIRTUAL SMART VIDEO_1080p.mp4',
-        en: '/Public/Videos/VIRTUAL SMART VIDEO/16. VIRTUAL SMART VIDEO INGLES_1080p.mp4'
+        es: '/Public/videos/VIRTUAL SMART VIDEO/16. VIRTUAL SMART VIDEO_1080p.mp4',
+        en: '/Public/videos/VIRTUAL SMART VIDEO/16. VIRTUAL SMART VIDEO INGLES_1080p.mp4'
       },
       'VIRTUAL IPV': {
-        es: '/Public/Videos/VIRTUAL IPV/17. VIRTUAL IPV_1080p.mp4',
-        en: '/Public/Videos/VIRTUAL IPV/17. VIRTUAL IPV INGLES_1080p.mp4'
+        es: '/Public/videos/VIRTUAL IPV/17. VIRTUAL IPV_1080p.mp4',
+        en: '/Public/videos/VIRTUAL IPV/17. VIRTUAL IPV INGLES_1080p.mp4'
       },
       'VIRTUAL QUALITY FIELD': {
-        es: '/Public/Videos/VIRTUAL QUALITY FIELD/18. VIRTUAL QUALITY FIELD_1080p.mp4',
-        en: '/Public/Videos/VIRTUAL QUALITY FIELD/18. VIRTUAL QUALITY FIELD INGLES_1080p.mp4'
+        es: '/Public/videos/VIRTUAL QUALITY FIELD/18. VIRTUAL QUALITY FIELD_1080p.mp4',
+        en: '/Public/videos/VIRTUAL QUALITY FIELD/18. VIRTUAL QUALITY FIELD INGLES_1080p.mp4'
       },
       'ANALITICA BIG DATA': {
-        es: '/Public/Videos/ANALITICA BIG DATA/19. ANALITICA BIG DATA_1080p.mp4',
-        en: '/Public/Videos/ANALITICA BIG DATA/19. BIG DATA ANALYTICS_1080p.mp4'
+        es: '/Public/videos/ANALITICA BIG DATA/19. ANALITICA BIG DATA_1080p.mp4',
+        en: '/Public/videos/ANALITICA BIG DATA/19. BIG DATA ANALYTICS_1080p.mp4'
       }
     };
     

@@ -23,7 +23,7 @@ const HeroSection = () => {
           poster="/Public/images/AI CONNECT FINAL.png"
           controls={false}
         >
-          <source src="/Public/Videos/AI CONNECT Y HOME/HOME DE AICONNECT .mp4" type="video/mp4" />
+          <source src="/Public/videos/AI CONNECT Y HOME/HOME DE AICONNECT .mp4" type="video/mp4" />
           {language === 'es' ? 'Tu navegador no soporta el elemento de video.' : 'Your browser does not support the video element.'}
         </video>
         {/* Overlay for better text readability */}

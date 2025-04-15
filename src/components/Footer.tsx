@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <div className="flex items-center">
               <img 
-                src="/Public/images/AI CONNECT FINAL.png"
+                src="./images/AI CONNECT FINAL.png"
                 alt="AI Connect"
                 className="h-16 md:h-20 object-contain transition-all duration-300"
                 style={{ filter: 'brightness(1.05)' }}

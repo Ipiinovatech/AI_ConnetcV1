@@ -35,13 +35,6 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
     }
   };
 
-  const toggleImage = () => {
-    // Desktop image toggle button
-    if (window.innerWidth > 768) {
-      setShowImage(!showImage);
-    }
-  };
-
   const handleFAQsClick = (e: React.MouseEvent) => {
     e.preventDefault();
     onClose();
@@ -102,29 +95,9 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
         es: '/Public/videos/AI Trainer/13. Capacitacin en Inteligencia Artificial_1080p.mp4',
         en: '/Public/videos/AI Trainer/13. Artificial Intelligence Training_1080p.mp4'
       },
-      'PA YA 2.0': {
-        es: '/Public/videos/pa_ya/14_PAYA!_1080p.mp4',
-        en: '/Public/videos/pa_ya/14_PAYA! INGLES_1080p.mp4'
-      },
-      'FABRICA DE SOFTWARE': {
-        es: '/Public/videos/FABRICA DE SOFTWARE/15. FABRICA DE SOFTWARE_1080p.mp4',
-        en: '/Public/videos/FABRICA DE SOFTWARE/15. SOFTWARE FACTORY_1080p.mp4'
-      },
       'VIRTUAL SMART VIDEO': {
         es: '/Public/videos/VIRTUAL SMART VIDEO/16. VIRTUAL SMART VIDEO_1080p.mp4',
         en: '/Public/videos/VIRTUAL SMART VIDEO/16. VIRTUAL SMART VIDEO INGLES_1080p.mp4'
-      },
-      'VIRTUAL IPV': {
-        es: '/Public/videos/VIRTUAL IPV/17. VIRTUAL IPV_1080p.mp4',
-        en: '/Public/videos/VIRTUAL IPV/17. VIRTUAL IPV INGLES_1080p.mp4'
-      },
-      'VIRTUAL QUALITY FIELD': {
-        es: '/Public/videos/VIRTUAL QUALITY FIELD/18. VIRTUAL QUALITY FIELD_1080p.mp4',
-        en: '/Public/videos/VIRTUAL QUALITY FIELD/18. VIRTUAL QUALITY FIELD INGLES_1080p.mp4'
-      },
-      'ANALITICA BIG DATA': {
-        es: '/Public/videos/ANALITICA BIG DATA/19. ANALITICA BIG DATA_1080p.mp4',
-        en: '/Public/videos/ANALITICA BIG DATA/19. BIG DATA ANALYTICS_1080p.mp4'
       }
     };
     
@@ -195,23 +168,8 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
             </button>
           </div>
           
-          {/* Image Toggle Button - Only on Desktop */}
-          <div className="hidden md:block">
-            <button
-              onClick={toggleImage}
-              className="flex items-center justify-center space-x-2 w-full text-white/80 hover:text-white bg-white/10 hover:bg-white/20 px-4 py-3 rounded-lg transition-colors"
-            >
-              <Image size={18} />
-              <span className="text-sm font-medium">
-                {language === 'es' 
-                  ? (showImage ? 'Ocultar imagen' : 'Mostrar imagen')
-                  : (showImage ? 'Hide image' : 'Show image')}
-              </span>
-            </button>
-          </div>
-          
-          {/* Product Image - Both Mobile and Desktop */}
-          {showImage && (
+          {/* Product Image - Only on Mobile */}
+          {showImage && window.innerWidth <= 768 && (
             <div className="bg-white/5 rounded-lg p-4">
               <img 
                 src={product.image} 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useLanguage } from '../context/LanguageContext';
@@ -13,6 +13,7 @@ const ProductsSection = () => {
   const { language } = useLanguage();
   const navigate = useNavigate();
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
+  const [isZoomed, setIsZoomed] = useState(false);
   
   const productos = [
     { id: 1, nombre: "ProcessAI", imagen: "/Public/images/ProcessAI.jpeg" },
@@ -25,33 +26,37 @@ const ProductsSection = () => {
     { id: 8, nombre: "CyberAI", imagen: "/Public/images/CyberAI.jpeg" },
     { id: 9, nombre: "TrueSing", imagen: "/Public/images/TrueSing.jpeg" },
     { id: 10, nombre: "InfluAI", imagen: "/Public/images/InfluAI.jpeg" },
-    { id: 11, nombre: "TestQAI", imagen: "/Public/images/TestQAI.jpeg" },
-    { id: 12, nombre: "AI Trainer", imagen: "/Public/images/AI Trainer.jpeg" },
-    { id: 13, nombre: "db-ai", imagen: "/Public/images/db-ai.jpeg" },
-    { id: 14, nombre: "VIRTUAL IPV", imagen: "/Public/images/VIRTUAL IPV.png" },
-    { id: 15, nombre: "VIRTUAL QUALITY FIELD", imagen: "/Public/images/VIRTUAL QUALITY FIELD.png" },
-    { id: 16, nombre: "VIRTUAL SMART VIDEO", imagen: "/Public/images/VIRTUAL SMART VIDEO.png" },
-    { id: 17, nombre: "ANALITICA BIG DATA", imagen: "/Public/images/ANALITICA BIG DATA.png" },
-    { id: 18, nombre: "FABRICA DE SOFTWARE", imagen: "/Public/images/FABRICA DE SOFTWARE.png" },
-    { id: 19, nombre: "PA YA 2.0", imagen: "/Public/images/PA YA.png" }
+    { id: 11, nombre: "db-ai", imagen: "/Public/images/db-ai.jpeg" },
+    { id: 12, nombre: "TestQAI", imagen: "/Public/images/TestQAI.jpeg" },
+    { id: 13, nombre: "AI Trainer", imagen: "/Public/images/AI Trainer.jpeg" },
+    { id: 14, nombre: "VIRTUAL SMART VIDEO", imagen: "/Public/images/VIRTUAL SMART VIDEO.png" }
   ];
-
-  const handleProductClick = (product: any) => {
-    // Only handle click on mobile devices
+  
+  const handleImageClick = () => {
     if (window.innerWidth <= 768) {
-      navigate('/proyectos', { 
-        state: { 
-          selectedProduct: product,
-          openModal: true 
-        }
-      });
+      setIsZoomed(!isZoomed);
+      if (!isZoomed) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
     }
   };
 
-  // Handle keyboard navigation
+  const handleProductClick = (producto: typeof productos[0]) => {
+    if (window.innerWidth <= 768) {
+      navigate(`/productos/${producto.id}`);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Only handle keyboard navigation on desktop
       if (window.innerWidth > 768 && swiper) {
         if (e.key === 'ArrowLeft') {
           swiper.slidePrev();
@@ -59,20 +64,49 @@ const ProductsSection = () => {
           swiper.slideNext();
         }
       }
+      if (e.key === 'Escape' && isZoomed) {
+        handleImageClick();
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [swiper]);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [swiper, isZoomed]);
 
   return (
-    <section className="py-16">
+    <section className="py-8 md:py-16">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16">
-          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto text-justify">
+        {/* Products Image with Zoom Functionality */}
+        <div className="flex justify-center mb-8 md:mb-12 relative">
+          <img 
+            src={language === 'es' ? "/Public/images/PRODUCTOS AI CONNECT.png" : "/Public/images/PRODUCTOS AI CONNECT INGLES.png"}
+            alt={language === 'es' ? "Productos AI Connect" : "AI Connect Products"}
+            className={`w-full max-w-[90%] md:max-w-full h-auto object-contain cursor-pointer transition-all duration-300`}
+            onClick={handleImageClick}
+          />
+
+          {/* Zoom Modal */}
+          {isZoomed && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#0a4d8c]/95 to-[#13477a]/95 backdrop-blur-sm">
+              <div className="relative w-full h-full flex items-center justify-center p-4">
+                <img 
+                  src={language === 'es' ? "/Public/images/PRODUCTOS AI CONNECT.png" : "/Public/images/PRODUCTOS AI CONNECT INGLES.png"}
+                  alt={language === 'es' ? "Productos AI Connect" : "AI Connect Products"}
+                  className="max-w-full max-h-full object-contain"
+                />
+                <button
+                  className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+                  onClick={handleImageClick}
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="text-center mb-8 md:mb-16">
+          <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto px-4 md:px-0">
             {language === 'es' ? (
               <>
                 Descubre cómo AIConnect ha transformado negocios con el lanzamiento de productos potenciados por IA. Haz clic{' '}
@@ -90,12 +124,13 @@ const ProductsSection = () => {
             )}
           </p>
         </div>
-        
-        <div className="relative max-w-6xl mx-auto">
+
+        {/* Products Grid */}
+        <div className="relative max-w-6xl mx-auto px-2 md:px-0">
           <Swiper
             onSwiper={setSwiper}
             slidesPerView={1}
-            spaceBetween={30}
+            spaceBetween={20}
             centeredSlides={true}
             loop={true}
             autoplay={{
@@ -111,11 +146,17 @@ const ProductsSection = () => {
               dynamicBullets: true,
             }}
             breakpoints={{
+              480: {
+                slidesPerView: 1.5,
+                spaceBetween: 20,
+              },
               640: {
                 slidesPerView: 2,
+                spaceBetween: 30,
               },
               1024: {
                 slidesPerView: 3,
+                spaceBetween: 30,
               },
             }}
             modules={[Navigation, Pagination, Autoplay]}
@@ -125,17 +166,16 @@ const ProductsSection = () => {
               <SwiperSlide 
                 key={producto.id}
                 onClick={() => handleProductClick(producto)}
-                className="cursor-pointer md:cursor-default" // Only show pointer cursor on mobile
+                className="cursor-pointer md:cursor-default py-4"
               >
                 <div className="relative group">
                   <img 
                     src={producto.imagen} 
                     alt={producto.nombre}
-                    className="w-full h-[300px] object-contain transition-transform duration-200 md:transform-none"
+                    className="w-full h-[200px] md:h-[300px] object-contain transition-transform duration-200 md:transform-none"
                   />
-                  {/* Mobile-only overlay with tap indication */}
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 transition-opacity md:hidden group-active:opacity-100">
-                    <span className="text-white text-sm font-medium">
+                    <span className="text-white text-sm font-medium px-4 py-2 bg-black/30 rounded-lg backdrop-blur-sm">
                       {language === 'es' ? 'Ver detalles' : 'View details'}
                     </span>
                   </div>
@@ -144,10 +184,10 @@ const ProductsSection = () => {
             ))}
           </Swiper>
           
-          <button className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
+          <button className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
             <ChevronLeft className="h-8 w-8 text-[#38bdf8]" />
           </button>
-          <button className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
+          <button className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
             <ChevronRight className="h-8 w-8 text-[#38bdf8]" />
           </button>
         </div>
@@ -184,22 +224,40 @@ const ProductsSection = () => {
           display: none;
         }
 
-        /* Mobile-specific touch feedback */
         @media (max-width: 768px) {
           .swiper-slide:active img {
-            transform: scale(0.98);
+            transform: scale(0.95);
             transition: transform 0.2s;
           }
           
           .swiper-slide:active .group-active\\:opacity-100 {
             opacity: 1;
           }
+
+          .swiper-pagination {
+            bottom: 0 !important;
+          }
+
+          .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+            margin: 0 4px !important;
+          }
         }
 
-        /* Disable click effects on desktop */
         @media (min-width: 769px) {
           .swiper-slide {
             pointer-events: none;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .swiper {
+            padding: 10px 0;
+          }
+          
+          .swiper-slide {
+            padding: 0 5px;
           }
         }
       `}</style>

@@ -11,20 +11,20 @@ const ProductsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   
   const productos = [
-    { nombre: "InfluAI", imagen: "/Public/images/InfluAI.jpeg" },
-    { nombre: "TrueSing", imagen: "/Public/images/TrueSing.jpeg" },
-    { nombre: "CyberAI", imagen: "/Public/images/CyberAI.jpeg" },
-    { nombre: "AvAI", imagen: "/Public/images/AvAI.jpeg" },
-    { nombre: "AI Trainer", imagen: "/Public/images/AI Trainer.jpeg" },
-    { nombre: "AI Vision", imagen: "/Public/images/AI Vision.jpeg" },
-    { nombre: "AsistAI", imagen: "/Public/images/AsistAI.jpeg" },
-    { nombre: "db-ai", imagen: "/Public/images/db-ai.jpeg" },
     { nombre: "ProcessAI", imagen: "/Public/images/ProcessAI.jpeg" },
-    { nombre: "SellAI", imagen: "/Public/images/SellAI.jpeg" },
-    { nombre: "TestQAI", imagen: "/Public/images/TestQAI.jpeg" },
-    { nombre: "MultimediaAI", imagen: "/Public/images/MultimediAI.jpeg" },
     { nombre: "MulticonnectAI", imagen: "/Public/images/MulticonnectAI.jpeg" },
-    { nombre: "FaceIA", imagen: "/Public/images/FaceIA.jpeg" }
+    { nombre: "SellAI", imagen: "/Public/images/SellAI.jpeg" },
+    { nombre: "AI Vision", imagen: "/Public/images/AI Vision.jpeg" },
+    { nombre: "FaceIA", imagen: "/Public/images/FaceIA.jpeg" },
+    { nombre: "MultimediaAI", imagen: "/Public/images/MultimediAI.jpeg" },
+    { nombre: "AvAI", imagen: "/Public/images/AvAI.jpeg" },
+    { nombre: "CyberAI", imagen: "/Public/images/CyberAI.jpeg" },
+    { nombre: "TrueSing", imagen: "/Public/images/TrueSing.jpeg" },
+    { nombre: "InfluAI", imagen: "/Public/images/InfluAI.jpeg" },
+    { nombre: "db-ai", imagen: "/Public/images/db-ai.jpeg" },
+    { nombre: "TestQAI", imagen: "/Public/images/TestQAI.jpeg" },
+    { nombre: "AI Trainer", imagen: "/Public/images/AI Trainer.jpeg" },
+    { nombre: "VIRTUAL SMART VIDEO", imagen: "/Public/images/VIRTUAL SMART VIDEO.png" }
   ];
 
   return (
@@ -60,6 +60,7 @@ const ProductsSection = () => {
             modules={[EffectCoverflow, Navigation, Pagination]}
             className="mySwiper"
             onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+            loop={true}
           >
             {productos.map((producto, index) => (
               <SwiperSlide key={index}>

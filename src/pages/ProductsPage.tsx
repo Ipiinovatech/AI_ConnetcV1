@@ -84,15 +84,15 @@ const ProductsPage = () => {
             <div className="max-w-3xl mx-auto">
               {/* Initial Description */}
               <div className="text-justify mb-6">
-                <span className="text-[#13477a] font-bold">AIConnect:</span>{' '}
-                <span className="text-black font-semibold">
+                <span className="text-[#13477a]">AIConnect:</span>{' '}
+                <span className="text-black">
                   {language === 'es' 
                     ? 'Plataforma de IA multiservicios para optimizar negocios, aumentar eficiencia y potenciar la competitividad.'
                     : 'Multi-service AI platform to optimize business, increase efficiency and enhance competitiveness.'}{' '}
                 </span>
                 <button 
                   onClick={toggleExpand} 
-                  className="text-[#0066cc] hover:text-[#004999] font-semibold transition-colors inline-flex items-center"
+                  className="text-[#0066cc] hover:text-[#004999] transition-colors inline-flex items-center"
                 >
                   {language === 'es' ? 'Dar clic para saber más...' : 'Click to learn more...'}
                 </button>
@@ -101,7 +101,7 @@ const ProductsPage = () => {
               {isExpanded && (
                 <div className="space-y-6">
                   {/* First Expanded Section */}
-                  <p className="text-justify text-black font-semibold">
+                  <p className="text-justify text-black">
                     {language === 'es'
                       ? 'Este es un espacio ideal para presentar detalladamente nuestra plataforma, su impacto en los negocios y cómo nos destacamos entre la competencia.'
                       : 'This is an ideal space to present our platform in detail, its impact on business, and how we stand out from the competition.'}
@@ -109,14 +109,14 @@ const ProductsPage = () => {
                   
                   {/* Second Expanded Section */}
                   <div className="text-justify">
-                    <span className="text-black font-semibold">
+                    <span className="text-black">
                       {language === 'es'
                         ? 'AIConnect es la plataforma líder en inteligencia artificial que ofrece una amplia gama de servicios para potenciar tu producto. Para descubrir cómo podemos llevar tu producto al siguiente nivel '
                         : 'AIConnect is the leading artificial intelligence platform offering a wide range of services to enhance your product. To discover how we can take your product to the next level '}
                     </span>
                     <button 
                       onClick={handleAssistantClick}
-                      className="text-[#0066cc] hover:text-[#004999] font-semibold transition-colors"
+                      className="text-[#0066cc] hover:text-[#004999] transition-colors"
                     >
                       {language === 'es' ? 'Haz clic aquí' : 'Click here'}
                     </button>
@@ -126,7 +126,7 @@ const ProductsPage = () => {
                   <div className="text-center">
                     <button 
                       onClick={toggleExpand}
-                      className="text-[#0066cc] hover:text-[#004999] font-semibold transition-colors"
+                      className="text-[#0066cc] hover:text-[#004999] transition-colors"
                     >
                       {language === 'es' ? 'Dar clic para mostrar menos.' : 'Click to show less.'}
                     </button>
@@ -150,13 +150,13 @@ const ProductsPage = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
                     {/* Competitive Advantages Box */}
                     <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-                      <h3 className="text-xl font-semibold text-[#13477a] mb-4">
+                      <h3 className="text-xl text-[#13477a] mb-4">
                         {language === 'es' ? 'Ventajas competitivas' : 'Competitive advantages'}
                       </h3>
                       <ul className="space-y-3">
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es'
                               ? 'Tecnología de vanguardia con algoritmos propietarios'
                               : 'Cutting-edge technology with proprietary algorithms'}
@@ -164,7 +164,7 @@ const ProductsPage = () => {
                         </li>
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es'
                               ? 'Soluciones personalizadas para cada sector empresarial'
                               : 'Customized solutions for each business sector'}
@@ -172,7 +172,7 @@ const ProductsPage = () => {
                         </li>
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es'
                               ? 'Implementación rápida y soporte técnico continuo'
                               : 'Quick implementation and continuous technical support'}
@@ -180,7 +180,7 @@ const ProductsPage = () => {
                         </li>
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es'
                               ? 'Escalabilidad garantizada para crecer con tu negocio'
                               : 'Guaranteed scalability to grow with your business'}
@@ -191,37 +191,37 @@ const ProductsPage = () => {
 
                     {/* Sectors Box */}
                     <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-                      <h3 className="text-xl font-semibold text-[#13477a] mb-4">
+                      <h3 className="text-xl text-[#13477a] mb-4">
                         {language === 'es' ? 'Sectores que atendemos' : 'Sectors we serve'}
                       </h3>
                       <ul className="space-y-3">
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es' ? 'Finanzas y banca' : 'Finance and banking'}
                           </span>
                         </li>
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es' ? 'Salud y ciencias de la vida' : 'Healthcare and life sciences'}
                           </span>
                         </li>
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es' ? 'Manufactura y logística' : 'Manufacturing and logistics'}
                           </span>
                         </li>
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es' ? 'Retail y comercio electrónico' : 'Retail and e-commerce'}
                           </span>
                         </li>
                         <li className="flex items-start">
                           <span className="text-[#0066cc] mr-2">•</span>
-                          <span className="text-black font-medium">
+                          <span className="text-black">
                             {language === 'es' ? 'Telecomunicaciones y tecnología' : 'Telecommunications and technology'}
                           </span>
                         </li>

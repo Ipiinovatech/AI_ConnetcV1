@@ -29,7 +29,6 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
   if (!isOpen || !product) return null;
 
   const handleImageClick = () => {
-    // On mobile, clicking the header image shows the larger image inline
     if (window.innerWidth <= 768) {
       setShowImage(!showImage);
     }
@@ -41,63 +40,47 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
     navigate('/#faqs');
   };
 
+  const handleDemoClick = () => {
+    setShowDemoModal(true);
+  };
+
+  const handleDemoSuccess = () => {
+    setShowDemoModal(false);
+    if (product.name === "AI Vision") {
+      navigate('/demo-bienvenido', { 
+        state: { 
+          showAiVisionDemo: true,
+          demoVideo: '/Public/Videos/DEMOSTRACION/DEMO AI VISION (COMPRIMIDO).mp4'
+        }
+      });
+    } else if (product.name === "SellAI") {
+      navigate('/demo-bienvenido', {
+        state: {
+          showSellAIDemo: true
+        }
+      });
+    } else {
+      navigate('/demo-bienvenido');
+    }
+  };
+
   const getProductVideos = (productName: string) => {
     const videos = {
       'ProcessAI': {
-        es: '/Public/videos/PROCESSAI/1. Optimizacin y Automatizacin de Procesos_1080p.mp4',
-        en: '/Public/videos/PROCESSAI/1. Process Optimization and Automation_1080p.mp4'
+        es: '/Public/Videos/PROCESSAI/1. Optimizacin y Automatizacin de Procesos_1080p.mp4',
+        en: '/Public/Videos/PROCESSAI/1. Process Optimization and Automation_1080p.mp4'
       },
       'MulticonnectAI': {
-        es: '/Public/videos/MulticonnectAI/2. Agentes Inteligentes Multicanal (ESPAOL)_1080p.mp4',
-        en: '/Public/videos/MulticonnectAI/2. Multichannel Intelligent Agents (INGLES)_1080p.mp4'
+        es: '/Public/Videos/MulticonnectAI/2. Agentes Inteligentes Multicanal (ESPAOL)_1080p.mp4',
+        en: '/Public/Videos/MulticonnectAI/2. Multichannel Intelligent Agents (INGLES)_1080p.mp4'
       },
       'SellAI': {
-        es: '/Public/videos/SellAI/3. Agente IA de Ventas Multicanal_1080p.mp4',
-        en: '/Public/videos/SellAI/3. Multichannel Sales AI Agent_1080p.mp4'
+        es: '/Public/Videos/SellAI/3. Agente IA de Ventas Multicanal_1080p.mp4',
+        en: '/Public/Videos/SellAI/3. Multichannel Sales AI Agent_1080p.mp4'
       },
       'AI Vision': {
-        es: '/Public/videos/AI Vision/4. Servicios de Visin Artificial_1080p.mp4',
-        en: '/Public/videos/AI Vision/4. Artificial Vision Services (INGLES)_1080p.mp4'
-      },
-      'FaceIA': {
-        es: '/Public/videos/FaceIA/5. Servicio de Reconocimiento Facial_1080p.mp4',
-        en: '/Public/videos/FaceIA/5. Facial Recognition Service_1080p.mp4'
-      },
-      'MultimediaAI': {
-        es: '/Public/videos/Multimedia AI/6. Generacion Multimodal con IA_1080p.mp4',
-        en: '/Public/videos/Multimedia AI/6. Multimodal Generation with AI_1080p.mp4'
-      },
-      'AvAI': {
-        es: '/Public/videos/AvAI/7. Avatares de IA_1080p.mp4',
-        en: '/Public/videos/AvAI/7. Avatars with AI_1080p.mp4'
-      },
-      'CyberAI': {
-        es: '/Public/videos/CyberAI/8. Ciberseguridad Potenciada con IA_1080p.mp4',
-        en: '/Public/videos/CyberAI/8. AIPowered Cybersecurity_1080p.mp4'
-      },
-      'TrueSing': {
-        es: '/Public/videos/TrueSing/9. Firmas Digitales con IA_1080p.mp4',
-        en: '/Public/videos/TrueSing/9. Digital Signatures with AI_1080p.mp4'
-      },
-      'InfluAI': {
-        es: '/Public/videos/InfluAI/10. Influencers de IA para Redes Sociales_1080p.mp4',
-        en: '/Public/videos/InfluAI/10. AI Influencers for Social Media_1080p.mp4'
-      },
-      'db-ai': {
-        es: '/Public/videos/db-ai/11. Bases de Datos Vectoriales(RAG) con Inteligencia Artificial_1080p.mp4',
-        en: '/Public/videos/db-ai/11. Vector Databases (RAG) with Artificial Intelligence_1080p.mp4'
-      },
-      'TestQAI': {
-        es: '/Public/videos/TestQAAI/12. Agentes de QA testing con IA_1080p.mp4',
-        en: '/Public/videos/TestQAAI/12. QA testing agents with AI_1080p.mp4'
-      },
-      'AI Trainer': {
-        es: '/Public/videos/AI Trainer/13. Capacitacin en Inteligencia Artificial_1080p.mp4',
-        en: '/Public/videos/AI Trainer/13. Artificial Intelligence Training_1080p.mp4'
-      },
-      'VIRTUAL SMART VIDEO': {
-        es: '/Public/videos/VIRTUAL SMART VIDEO/16. VIRTUAL SMART VIDEO_1080p.mp4',
-        en: '/Public/videos/VIRTUAL SMART VIDEO/16. VIRTUAL SMART VIDEO INGLES_1080p.mp4'
+        es: '/Public/Videos/AI Vision/4. Servicios de Visin Artificial_1080p.mp4',
+        en: '/Public/Videos/AI Vision/4. Artificial Vision Services (INGLES)_1080p.mp4'
       }
     };
     
@@ -112,7 +95,7 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
   return (
     <div className="fixed inset-0 bg-black/90 flex items-start justify-center z-50 overflow-y-auto md:py-8">
       <div className="relative bg-[#0c0c24] text-white w-full md:max-w-2xl lg:max-w-4xl rounded-none md:rounded-2xl shadow-2xl overflow-hidden min-h-screen md:min-h-0">
-        {/* Close Button - Fixed position on mobile */}
+        {/* Close Button */}
         <button
           onClick={onClose}
           className="fixed md:absolute top-4 right-4 z-50 bg-black/50 hover:bg-black/70 p-2 rounded-full backdrop-blur-sm transition-colors"
@@ -227,7 +210,7 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
                   : `Contact us today and discover how ${product.name} can drive your business.`}
               </p>
               <button 
-                onClick={() => setShowDemoModal(true)}
+                onClick={handleDemoClick}
                 className="w-full md:w-auto bg-[#38bdf8] hover:bg-[#60ccff] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base"
               >
                 {language === 'es' ? 'Mira El Demo En Vivo' : 'Watch Live Demo'}
@@ -239,7 +222,8 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
 
       <DemoRequestModal 
         isOpen={showDemoModal} 
-        onClose={() => setShowDemoModal(false)} 
+        onClose={() => setShowDemoModal(false)}
+        onSuccess={handleDemoSuccess}
       />
     </div>
   );

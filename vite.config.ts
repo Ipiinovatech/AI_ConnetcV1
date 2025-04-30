@@ -8,22 +8,18 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   build: {
-    assetsInlineLimit: 0, // Ensures all assets are processed as files
+    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
         manualChunks: {
-          // Split vendor code into separate chunks
           vendor: ['react', 'react-dom', 'react-router-dom'],
           multimedia: ['swiper', 'react-player']
         }
       }
     },
-    // Ensure assets are copied to output directory
     copyPublicDir: true
   },
-  // Properly handle static assets
   publicDir: 'public',
-  // Configure asset handling
   assetsInclude: ['**/*.mp4', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif'],
   resolve: {
     alias: {
@@ -31,12 +27,9 @@ export default defineConfig({
       '@public': path.resolve(__dirname, './public')
     }
   },
-  // Base URL configuration for production
   base: '/',
-  // Configure server options
   server: {
     fs: {
-      // Allow serving files from one level up to the project root
       allow: ['..']
     }
   }

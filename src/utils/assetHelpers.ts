@@ -19,8 +19,8 @@ export const getAssetPath = (relativePath: string): string => {
  */
 export const getVideoUrl = (relativePath: string): string => {
   // Remove 'Public/Videos/' prefix if present
-  const cleanPath = relativePath.replace(/^Public\/videos\//, '');
-  return getAssetPath(`videos/${cleanPath}`);
+  const cleanPath = relativePath.replace(/^Public\/Videos\//, '');
+  return getAssetPath(`Videos/${cleanPath}`);
 };
 
 /**
@@ -28,8 +28,8 @@ export const getVideoUrl = (relativePath: string): string => {
  */
 export const getImageUrl = (relativePath: string): string => {
   // Remove 'Public/Images/' prefix if present
-  const cleanPath = relativePath.replace(/^Public\/images\//, '');
-  return getAssetPath(`images/${cleanPath}`);
+  const cleanPath = relativePath.replace(/^Public\/Images\//, '');
+  return getAssetPath(`Images/${cleanPath}`);
 };
 
 /**

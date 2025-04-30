@@ -16,6 +16,7 @@ interface ProductDetailModalProps {
       es: string;
       en: string;
     };
+    demoVideo?: string;
   } | null;
 }
 
@@ -46,41 +47,57 @@ const ProductDetailModal = ({ isOpen, onClose, product }: ProductDetailModalProp
 
   const handleDemoSuccess = () => {
     setShowDemoModal(false);
-    if (product.name === "AI Vision") {
-      navigate('/demo-bienvenido', { 
-        state: { 
+    
+    // Determine which demo video to show based on the product
+    let demoState = {};
+    
+    switch (product.name) {
+      case "AI Vision":
+        demoState = {
           showAiVisionDemo: true,
-          demoVideo: '/Public/Videos/DEMOSTRACION/DEMO AI VISION (COMPRIMIDO).mp4'
+          demoVideo: '/Public/videos/DEMOSTRACION/AI_VISION/DEMO AI VISION.mp4'
+        };
+        break;
+      case "SellAI":
+        demoState = {
+          showSellAIDemo: true,
+          demoVideos: {
+            call: '/Public/videos/DEMOSTRACION/DEMOSellAI.mp4',
+            multilingual: '/Public/videos/DEMOSTRACION/DEMO SELLAI (INGLES).mp4',
+            chat: '/Public/videos/DEMOSTRACION/CHAT DEMO SELL AI (10MB).mp4'
+          }
+        };
+        break;
+      // Add more cases for other products here
+      default:
+        if (product.demoVideo) {
+          demoState = {
+            showCustomDemo: true,
+            demoVideo: product.demoVideo
+          };
         }
-      });
-    } else if (product.name === "SellAI") {
-      navigate('/demo-bienvenido', {
-        state: {
-          showSellAIDemo: true
-        }
-      });
-    } else {
-      navigate('/demo-bienvenido');
     }
+
+    navigate('/demo-bienvenido', { state: demoState });
   };
 
   const getProductVideos = (productName: string) => {
     const videos = {
       'ProcessAI': {
-        es: '/Public/Videos/PROCESSAI/1. Optimizacin y Automatizacin de Procesos_1080p.mp4',
-        en: '/Public/Videos/PROCESSAI/1. Process Optimization and Automation_1080p.mp4'
+        es: '/Public/videos/PROCESSAI/1. Optimizacin y Automatizacin de Procesos_1080p.mp4',
+        en: '/Public/videos/PROCESSAI/1. Process Optimization and Automation_1080p.mp4'
       },
       'MulticonnectAI': {
-        es: '/Public/Videos/MulticonnectAI/2. Agentes Inteligentes Multicanal (ESPAOL)_1080p.mp4',
-        en: '/Public/Videos/MulticonnectAI/2. Multichannel Intelligent Agents (INGLES)_1080p.mp4'
+        es: '/Public/videos/MulticonnectAI/2. Agentes Inteligentes Multicanal (ESPAOL)_1080p.mp4',
+        en: '/Public/videos/MulticonnectAI/2. Multichannel Intelligent Agents (INGLES)_1080p.mp4'
       },
       'SellAI': {
-        es: '/Public/Videos/SellAI/3. Agente IA de Ventas Multicanal_1080p.mp4',
-        en: '/Public/Videos/SellAI/3. Multichannel Sales AI Agent_1080p.mp4'
+        es: '/Public/videos/SellAI/3. Agente IA de Ventas Multicanal_1080p.mp4',
+        en: '/Public/videos/SellAI/3. Multichannel Sales AI Agent_1080p.mp4'
       },
       'AI Vision': {
-        es: '/Public/Videos/AI Vision/4. Servicios de Visin Artificial_1080p.mp4',
-        en: '/Public/Videos/AI Vision/4. Artificial Vision Services (INGLES)_1080p.mp4'
+        es: '/Public/videos/AI Vision/4. Servicios de Visin Artificial_1080p.mp4',
+        en: '/Public/videos/AI Vision/4. Artificial Vision Services (INGLES)_1080p.mp4'
       }
     };
     

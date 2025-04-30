@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Linkedin, Facebook, Instagram, Play, Pause, Volume2, VolumeX, Maximize2 } from 'lucide-react';
 import Footer from '../components/Footer';
 import VirtualAssistant from '../components/VirtualAssistant';
 import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
+import { useLanguage } from '../context/LanguageContext';
 
 const DemoWelcomePage = () => {
   const { user } = useAuth();
+  const { language } = useLanguage();
+  const location = useLocation();
   const [activeVideo, setActiveVideo] = useState<'call' | 'multilingual' | 'chat'>('call');
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -20,32 +24,44 @@ const DemoWelcomePage = () => {
   });
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Configuración de videos con relaciones de aspecto
-  const videos = {
+  // Detectar el tipo de demo desde location.state
+  const showAiVisionDemo = location.state?.showAiVisionDemo;
+  const aiVisionDemoVideo = location.state?.demoVideo || '/Public/videos/DEMOSTRACION/AI_VISION/DemoAIVision.mp4';
+  const showSellAIDemo = !showAiVisionDemo; // Mostrar SellAI por defecto si no es AI Vision
+
+  // Configuración de videos para SellAI
+  const sellAIVideos = {
     call: {
-      title: 'Llamada',
+      title: language === 'es' ? 'Llamada' : 'Call',
       src: '/Public/videos/DEMOSTRACION/SELL_AI/DEMOSellAI.mp4',
       poster: '/Public/images/SellAI.jpeg',
-      aspectRatio: '16/9' // Horizontal
+      aspectRatio: '16/9'
     },
     multilingual: {
-      title: 'Multilingüe',
+      title: language === 'es' ? 'Multilingüe' : 'Multilingual',
       src: '/Public/videos/DEMOSTRACION/SELL_AI/DEMO SELLAI (INGLES).mp4',
       poster: '/Public/images/SellAI.jpeg',
-      aspectRatio: '16/9' // Horizontal
+      aspectRatio: '16/9'
     },
     chat: {
       title: 'Chat',
       src: '/Public/videos/DEMOSTRACION/SELL_AI/CHAT_DEMO_SELL_AI.mp4',
       fallbackSrc: '/Public/videos/DEMOSTRACION/SELL_AI/CHAT DEMO SELL AI.mp4',
       poster: '/Public/images/SellAI.jpeg',
-      aspectRatio: '9/16' // Vertical
+      aspectRatio: '9/16'
     }
   };
 
+  // Configuración para AI Vision
+  const aiVisionVideo = {
+    title: 'AI Vision',
+    src: aiVisionDemoVideo,
+    poster: '/Public/images/AI Vision.jpeg',
+    aspectRatio: '16/9'
+  };
+
   // Ajustar el estilo del video según su relación de aspecto
-  const adjustVideoStyle = () => {
-    const aspectRatio = videos[activeVideo].aspectRatio;
+  const adjustVideoStyle = (aspectRatio = '16/9') => {
     const isVertical = aspectRatio === '9/16';
 
     if (isVertical) {
@@ -77,12 +93,17 @@ const DemoWelcomePage = () => {
       }
     } catch (err) {
       console.error('Error al reproducir:', err);
-      setError('Error al iniciar la reproducción del video');
+      setError(language === 'es' 
+        ? 'Error al iniciar la reproducción del video' 
+        : 'Error starting video playback');
       
-      if (activeVideo === 'chat' && videoRef.current.src !== videos.chat.fallbackSrc) {
-        videoRef.current.src = videos.chat.fallbackSrc;
+      // Intentar con fallback solo para el chat de SellAI
+      if (!showAiVisionDemo && activeVideo === 'chat' && videoRef.current.src !== sellAIVideos.chat.fallbackSrc) {
+        videoRef.current.src = sellAIVideos.chat.fallbackSrc;
         videoRef.current.load();
-        setError('Cargando versión alternativa del video de chat...');
+        setError(language === 'es' 
+          ? 'Cargando versión alternativa del video de chat...' 
+          : 'Loading alternative version of chat video...');
       }
     }
   };
@@ -91,23 +112,34 @@ const DemoWelcomePage = () => {
     if (!videoRef.current) return;
     
     const error = videoRef.current.error;
-    let errorMessage = 'Error al cargar el video';
+    let errorMessage = language === 'es' 
+      ? 'Error al cargar el video' 
+      : 'Error loading video';
     
     if (error) {
       switch(error.code) {
-        case 1: errorMessage = 'Error: La carga del video fue interrumpida'; break;
-        case 2: errorMessage = 'Error: Problema de red al cargar el video'; break;
-        case 3: errorMessage = 'Error: No se puede decodificar el video'; break;
-        case 4: errorMessage = 'Error: Formato de video no soportado'; break;
+        case 1: errorMessage = language === 'es' 
+          ? 'Error: La carga del video fue interrumpida' 
+          : 'Error: Video loading was interrupted'; break;
+        case 2: errorMessage = language === 'es' 
+          ? 'Error: Problema de red al cargar el video' 
+          : 'Error: Network problem while loading video'; break;
+        case 3: errorMessage = language === 'es' 
+          ? 'Error: No se puede decodificar el video' 
+          : 'Error: Cannot decode video'; break;
+        case 4: errorMessage = language === 'es' 
+          ? 'Error: Formato de video no soportado' 
+          : 'Error: Unsupported video format'; break;
       }
     }
     
     setError(errorMessage);
     
-    if (activeVideo === 'chat' && videoRef.current.src !== videos.chat.fallbackSrc) {
+    // Intentar con fallback solo para el chat de SellAI
+    if (!showAiVisionDemo && activeVideo === 'chat' && videoRef.current.src !== sellAIVideos.chat.fallbackSrc) {
       setTimeout(() => {
         if (videoRef.current) {
-          videoRef.current.src = videos.chat.fallbackSrc;
+          videoRef.current.src = sellAIVideos.chat.fallbackSrc;
           videoRef.current.load();
         }
       }, 1000);
@@ -143,13 +175,18 @@ const DemoWelcomePage = () => {
 
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
-      // Corrección específica para la duración del video de chat
-      if (activeVideo === 'chat' && videoRef.current.duration < 120) {
+      // Corrección específica para la duración del video de chat de SellAI
+      if (!showAiVisionDemo && activeVideo === 'chat' && videoRef.current.duration < 120) {
         setDuration(600); // 10 minutos en segundos
       } else {
         setDuration(videoRef.current.duration);
       }
-      adjustVideoStyle(); // Reajustar el estilo después de cargar los metadatos
+      
+      // Ajustar estilo según el tipo de video
+      const aspectRatio = showAiVisionDemo 
+        ? aiVisionVideo.aspectRatio 
+        : sellAIVideos[activeVideo].aspectRatio;
+      adjustVideoStyle(aspectRatio);
     }
   };
 
@@ -172,17 +209,31 @@ const DemoWelcomePage = () => {
     setCurrentTime(0);
     setError(null);
     if (videoRef.current) {
-      videoRef.current.src = videos[activeVideo].src;
+      const videoSrc = showAiVisionDemo 
+        ? aiVisionVideo.src 
+        : sellAIVideos[activeVideo].src;
+      
+      videoRef.current.src = videoSrc;
       videoRef.current.load();
-      adjustVideoStyle();
+      
+      const aspectRatio = showAiVisionDemo 
+        ? aiVisionVideo.aspectRatio 
+        : sellAIVideos[activeVideo].aspectRatio;
+      adjustVideoStyle(aspectRatio);
     }
-  }, [activeVideo]);
+  }, [activeVideo, language, showAiVisionDemo]);
 
   useEffect(() => {
-    const handleResize = () => adjustVideoStyle();
+    const handleResize = () => {
+      const aspectRatio = showAiVisionDemo 
+        ? aiVisionVideo.aspectRatio 
+        : sellAIVideos[activeVideo].aspectRatio;
+      adjustVideoStyle(aspectRatio);
+    };
+    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [activeVideo]);
+  }, [activeVideo, showAiVisionDemo]);
 
   return (
     <div className="min-h-screen bg-[#001a33] text-white">
@@ -211,32 +262,35 @@ const DemoWelcomePage = () => {
           {/* Welcome Message */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-              BIENVENIDO{user ? `, ${user.name.toUpperCase()}` : ''}
+              {language === 'es' ? 'BIENVENIDO' : 'WELCOME'}{user ? `, ${user.name.toUpperCase()}` : ''}
             </h1>
             <p className="text-xl text-blue-300 mb-8">
-              Has iniciado sesión correctamente con {user?.provider === 'google.com' ? 'Google' : 
-                user?.provider === 'facebook.com' ? 'Facebook' : 'tu cuenta de correo'}
+              {language === 'es' 
+                ? `Has iniciado sesión correctamente con ${user?.provider === 'google.com' ? 'Google' : user?.provider === 'facebook.com' ? 'Facebook' : 'tu cuenta de correo'}`
+                : `You have successfully logged in with ${user?.provider === 'google.com' ? 'Google' : user?.provider === 'facebook.com' ? 'Facebook' : 'your email account'}`}
             </p>
           </div>
 
-          {/* Video Navigation */}
-          <div className="flex justify-center mb-8">
-            <div className="inline-flex bg-white/10 rounded-lg p-1">
-              {(Object.keys(videos) as Array<keyof typeof videos>).map((key) => (
-                <button
-                  key={key}
-                  onClick={() => setActiveVideo(key)}
-                  className={`px-6 py-2 rounded-lg transition-colors ${
-                    activeVideo === key 
-                      ? 'bg-blue-500 text-white' 
-                      : 'text-white/70 hover:text-white'
-                  }`}
-                >
-                  {videos[key].title}
-                </button>
-              ))}
+          {/* Video Navigation - Solo para SellAI */}
+          {showSellAIDemo && (
+            <div className="flex justify-center mb-8">
+              <div className="inline-flex bg-white/10 rounded-lg p-1">
+                {(Object.keys(sellAIVideos) as Array<keyof typeof sellAIVideos>).map((key) => (
+                  <button
+                    key={key}
+                    onClick={() => setActiveVideo(key)}
+                    className={`px-6 py-2 rounded-lg transition-colors ${
+                      activeVideo === key 
+                        ? 'bg-blue-500 text-white' 
+                        : 'text-white/70 hover:text-white'
+                    }`}
+                  >
+                    {sellAIVideos[key].title}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Video Player */}
           <div className="max-w-4xl mx-auto">
@@ -247,20 +301,22 @@ const DemoWelcomePage = () => {
                 </div>
               )}
 
-              {/* Contenedor del video con relación de aspecto 16:9 */}
+              {/* Contenedor del video */}
               <div className="relative aspect-video bg-black rounded-lg overflow-hidden flex items-center justify-center">
                 <video
                   ref={videoRef}
                   className="mx-auto bg-black"
                   style={videoStyle}
-                  poster={videos[activeVideo].poster}
+                  poster={showAiVisionDemo ? aiVisionVideo.poster : sellAIVideos[activeVideo].poster}
                   onEnded={() => setIsPlaying(false)}
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}
                   onError={handleVideoError}
                   playsInline
                 >
-                  Tu navegador no soporta el elemento de video.
+                  {language === 'es' 
+                    ? 'Tu navegador no soporta el elemento de video.'
+                    : 'Your browser does not support the video element.'}
                 </video>
 
                 {/* Custom Controls */}

@@ -16,9 +16,10 @@ interface FormData {
 interface DemoRequestModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSuccess?: () => void;
 }
 
-const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
+const DemoRequestModal = ({ isOpen, onClose, onSuccess }: DemoRequestModalProps) => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
@@ -108,8 +109,12 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
     
     if (validateForm()) {
       console.log('Formulario enviado:', formData);
-      navigate('/demo-bienvenido');
-      onClose();
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        navigate('/demo-bienvenido');
+        onClose();
+      }
     }
   };
 
@@ -152,13 +157,15 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
         {/* Content */}
         <div className="p-4 max-h-[80vh] overflow-y-auto">
           <p className="text-gray-700 mb-6">
-            Para ver el demo en VIVO de los productos, aprueba el CAPTCHA y regístrate:
+            {language === 'es'
+              ? 'Para ver el demo en VIVO de los productos, aprueba el CAPTCHA y regístrate:'
+              : 'To watch the LIVE demo of the products, approve the CAPTCHA and register:'}
           </p>
           
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
-                Nombre completo
+                {language === 'es' ? 'Nombre completo' : 'Full name'}
               </label>
               <input
                 type="text"
@@ -167,13 +174,14 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                 value={formData.nombre}
                 onChange={handleChange}
                 className={`w-full px-3 py-2 border ${errors.nombre ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                required
               />
               {errors.nombre && <p className="text-red-500 text-sm mt-1">{errors.nombre}</p>}
             </div>
             
             <div>
               <label htmlFor="correo" className="block text-sm font-medium text-gray-700 mb-1">
-                Correo electrónico
+                {language === 'es' ? 'Correo electrónico' : 'Email'}
               </label>
               <input
                 type="email"
@@ -182,13 +190,14 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                 value={formData.correo}
                 onChange={handleChange}
                 className={`w-full px-3 py-2 border ${errors.correo ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                required
               />
               {errors.correo && <p className="text-red-500 text-sm mt-1">{errors.correo}</p>}
             </div>
             
             <div>
               <label htmlFor="empresa" className="block text-sm font-medium text-gray-700 mb-1">
-                Empresa
+                {language === 'es' ? 'Empresa' : 'Company'}
               </label>
               <input
                 type="text"
@@ -197,13 +206,14 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                 value={formData.empresa}
                 onChange={handleChange}
                 className={`w-full px-3 py-2 border ${errors.empresa ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                required
               />
               {errors.empresa && <p className="text-red-500 text-sm mt-1">{errors.empresa}</p>}
             </div>
             
             <div>
               <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">
-                Teléfono (opcional)
+                {language === 'es' ? 'Teléfono (opcional)' : 'Phone (optional)'}
               </label>
               <input
                 type="tel"
@@ -229,13 +239,15 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                 </div>
                 <div className="ml-3 text-sm">
                   <label htmlFor="terms" className="text-gray-700">
-                    He leído y acepto los{' '}
+                    {language === 'es' 
+                      ? 'He leído y acepto los '
+                      : 'I have read and accept the '}
                     <Link 
                       to="/terminos-y-condiciones" 
                       target="_blank" 
                       className="text-blue-600 hover:text-blue-800 inline-flex items-center"
                     >
-                      Términos y Condiciones
+                      {language === 'es' ? 'Términos y Condiciones' : 'Terms and Conditions'}
                       <ExternalLink size={12} className="ml-1" />
                     </Link>
                   </label>
@@ -255,13 +267,15 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                 </div>
                 <div className="ml-3 text-sm">
                   <label htmlFor="privacy" className="text-gray-700">
-                    He leído y acepto la{' '}
+                    {language === 'es'
+                      ? 'He leído y acepto la '
+                      : 'I have read and accept the '}
                     <Link 
                       to="/politica-de-privacidad" 
                       target="_blank" 
                       className="text-blue-600 hover:text-blue-800 inline-flex items-center"
                     >
-                      Política de Privacidad
+                      {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
                       <ExternalLink size={12} className="ml-1" />
                     </Link>
                   </label>
@@ -275,7 +289,7 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
             
             <div className="mt-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Verificación CAPTCHA
+                {language === 'es' ? 'Verificación CAPTCHA' : 'CAPTCHA Verification'}
               </label>
               <div ref={captchaRef} className="bg-gray-100 p-3 rounded-lg flex justify-center mb-3">
                 <LoadCanvasTemplate />
@@ -286,7 +300,7 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                   type="button" 
                   onClick={refreshCaptcha}
                   className="p-2 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors"
-                  aria-label="Refrescar CAPTCHA"
+                  aria-label={language === 'es' ? 'Refrescar CAPTCHA' : 'Refresh CAPTCHA'}
                 >
                   <RefreshCw size={18} />
                 </button>
@@ -296,7 +310,7 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                   name="captcha"
                   value={formData.captcha}
                   onChange={handleChange}
-                  placeholder="Ingrese el código"
+                  placeholder={language === 'es' ? 'Ingrese el código' : 'Enter the code'}
                   className={`flex-1 px-3 py-2 border ${captchaError ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                   required
                 />
@@ -311,7 +325,7 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors mt-6"
             >
-              Ver demostración
+              {language === 'es' ? 'Ver demostración' : 'Watch demo'}
             </button>
           </form>
         </div>
